@@ -23,7 +23,20 @@ An accountant calls about a broken clock and learns her universe is being discon
 
 [Voice assignments](episodes/001-universe-customer-support/api/voice-map.json) map the three roles to user-supplied voice IDs. A [short audition request](episodes/001-universe-customer-support/api/audition-request.json) and four ordered [full-story requests](episodes/001-universe-customer-support/api/requests) are prepared for the [Text to Dialogue API](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert).
 
-The JSON files are API request bodies, not Studio imports. Each contains spoken text paired with its voice ID. No authenticated generation tool or audio assembler is included, and no generated audition audio is stored here.
+The JSON files are API request bodies, not Studio imports. Each contains spoken text paired with its voice ID.
+
+### Generating audio
+
+Requires Node 22+.
+
+```sh
+npm install
+cp .env.example .env   # then set ELEVENLABS_API_KEY in .env
+npm run audition       # short three-voice audition
+npm run dialogue -- episodes/001-universe-customer-support/api/requests/part-01.json
+```
+
+Each run saves `generated/<request-name>-<UTC timestamp>.mp3`. Missing keys, invalid request files, and requests over 2,000 characters are refused before anything is sent. `npm test` runs the tests against a fake API. No audio assembler is included yet, and no generated audio is stored here.
 
 ElevenLabs onboarding was attempted on 2026-10-29 but could not download the CLI because the execution environment refused the npm registry connection. Authentication and SDK installation remain unfinished.
 
