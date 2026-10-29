@@ -2,7 +2,7 @@
 
 **As of 2026-10-29.** Update this page whenever a step finishes or the plan changes.
 
-The pilot is written and cast, with a new narrator, The Weirdness v2. Its full audio has been generated and joined into one 7 min 45 s file, waiting for the user to listen. Tools turn a script into ElevenLabs requests and design and save voices; joining the parts was done by hand with ffmpeg. Nothing has been published.
+The pilot is written and cast, with a new narrator, The Weirdness v2. Its full audio has been generated and joined into one 7 min 45 s file as a test; the user likes the new narrator and says the story overall sounds good. Tools turn a script into ElevenLabs requests and design and save voices; joining the parts was done by hand with ffmpeg. Nothing has been published.
 
 ## Done
 
@@ -17,11 +17,12 @@ The pilot is written and cast, with a new narrator, The Weirdness v2. Its full a
 | Voice design tool; first live design succeeded (nothing saved) | `npm run voice:design`; [ElevenLabs reference](reference/elevenlabs.md#confirmed-live) |
 | New narrator, The Weirdness v2, designed and saved through the API (the user found v1 "a bit boring") | [Decisions #20](decisions.md), [`voices/the-weirdness-v2.json`](../voices/the-weirdness-v2.json) |
 | Full pilot generated with Eleven v4 (four parts) and joined with ffmpeg: 464.8 s, about 7 min 45 s | [Episode 001: audio status](../episodes/001-universe-customer-support/README.md#audio-status) |
+| User listened to the full test episode: "I like the new narrator. The story overall sounds good." Not final approval: the user called it "just a test". | [Decisions #20](decisions.md) |
 | ffmpeg 9.0.2 installed on the user's machine (winget, `Gyan.FFmpeg`), for joining and measuring audio | `ffprobe` measured the audition takes: v3 32.48 s, v4 35.92 s |
 
 ## Next steps
 
-1. **Listen to the full pilot and refine.** Judge the new narrator across the whole story, the joins between parts, delivery, and pronunciation. Keep the instant hook, the human cost, and the unresolved final phone call. The runtime, 7 min 45 s, fits the 10-minute limit.
+1. **Refine the pilot's delivery.** The user suggested audio tags for vocal delivery and emotion ([proposal 11](decisions.md#proposals-not-final)). Try a few in the audition passages first, listen, then apply them across the script. Keep the instant hook, the human cost, and the unresolved final phone call. The runtime, 7 min 45 s, fits the 10-minute limit; tags may change it.
 2. **Build full-episode generation (pipeline step 4).** Turn the by-hand steps into a command: generate every part, join them with ffmpeg, and measure the runtime. Consider the continuity options so transitions stay smooth; see [ElevenLabs reference](reference/elevenlabs.md#text-to-dialogue).
 3. **Sound and visuals.** Create or license the piano motif and ambience, choose an editor, then make the avatar, thumbnail, and video scenes.
 4. **Plan a small follow-up slate and learn from release.** Cadence and audience metrics matter once the first production works.

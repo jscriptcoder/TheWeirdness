@@ -25,7 +25,7 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 | 17 | The user wants their own voice among the candidates. A reading passage was supplied; recording and cloning are unconfirmed. | 2026-10-29 |
 | 18 | Documentation lives in `docs/` as readable pages, kept current as the project progresses. This supersedes the earlier rule of a single handoff file. | 2026-10-29 |
 | 19 | Dialogue uses **Eleven v4** (`eleven_v4`). The user compared v4 and v3 takes of the pilot audition and preferred v4. `npm run requests` writes the model into every request. | 2026-10-29 |
-| 20 | The pilot's narrator is **The Weirdness v2** (`WsYpHk0kX6vf3JCGTNbY`). The user found v1 "a bit boring" and asked for a different narrator for this story; Claude drafted the prompt at the user's request, and the user picked preview 1 of 3. Whether it works across the full episode is the user's call after listening. | 2026-10-29 |
+| 20 | The pilot's narrator is **The Weirdness v2** (`WsYpHk0kX6vf3JCGTNbY`). The user found v1 "a bit boring" and asked for a different narrator for this story; Claude drafted the prompt at the user's request, and the user picked preview 1 of 3. After hearing the full episode: "I like the new narrator." | 2026-10-29 |
 
 ## Proposals, not final
 
@@ -39,6 +39,7 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 8. **Physics strictness:** prefer grounded departures. The user hasn't said how rigorously each story must follow its one altered rule.
 9. **Brand lines:** "Reality is optional here.", "One broken law. Infinite consequences.", "Reality is optional. Curiosity isn't.", and "Stories from somewhere that shouldn't exist." All were received positively; none is final.
 10. **Early cadence:** an optional 90-day experiment. Establish the pilot and a repeatable workflow first, then publish and measure.
+11. **Audio tags for delivery and emotion:** the user suggested adding them, as the [best practices](reference/elevenlabs-best-practices.md#emotion-and-delivery) describe (2026-10-29). Which tags, and where, isn't decided; test them in an audition before using them across a story.
 
 ## Superseded
 
