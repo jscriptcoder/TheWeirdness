@@ -43,7 +43,7 @@ Turns a `[ROLE]`-labelled script into Text to Dialogue request files. The script
 | No `--audition` | `<episode>/api/requests/part-01.json`, `part-02.json`, … Each holds whole passages, up to 2,000 characters in total. Old `part-*.json` files are removed first. |
 | `--audition 6-15` | `<episode>/api/audition-request.json`: passages 6 to 15, counted from 1 and inclusive, as one request. |
 
-It prints each file written and its character count. Windows and Unix line endings are read the same way.
+Every request names the dialogue model, `"model_id": "eleven_v4"` (see [decision #19](../decisions.md)), so rebuilding never changes the model silently. It prints each file written and its character count. Windows and Unix line endings are read the same way.
 
 **Refuses, writing nothing, when:**
 - text appears before the first speaker label, or there are no labels;
@@ -60,7 +60,7 @@ npm run dialogue -- <request.json>
 
 Sends one request file, unchanged, to `POST /v1/text-to-dialogue` (128 kbps MP3) and saves the audio as `generated/<request-name>-<UTC timestamp>.mp3`. Takes never overwrite each other.
 
-Optional API fields in the request file, such as `model_id` or `seed`, are passed through. Without `model_id`, ElevenLabs uses its default, `eleven_v3`.
+Optional API fields in the request file, such as `model_id` or `seed`, are passed through. Files built by `npm run requests` set `model_id` to `eleven_v4`; a file without `model_id` gets ElevenLabs' default, `eleven_v3`.
 
 **Refuses before sending when:** the key is missing; the file can't be read or isn't JSON; it has no passages, or a passage lacks text or a voice ID; or the passages total more than 2,000 characters.
 

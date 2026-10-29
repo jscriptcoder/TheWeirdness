@@ -2,7 +2,7 @@
 
 A summary of ElevenLabs' [text-to-speech best practices](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices) and what they mean for *The Weirdness*. It was read on 2026-10-29; check the source for current details and examples. This page summarises rather than copies it.
 
-The models we use for dialogue (`eleven_v3`, and possibly `eleven_v4`) are prompted with the text itself: its words, punctuation, and audio tags. Older SSML controls don't apply to them.
+Our dialogue model, Eleven v4 (`eleven_v4`), like v3 before it, is prompted with the text itself: its words, punctuation, and audio tags. Older SSML controls don't apply to them.
 
 ## Pauses and pacing
 
@@ -40,7 +40,7 @@ The models we use for dialogue (`eleven_v3`, and possibly `eleven_v4`) are promp
 
 ## Models
 
-ElevenLabs calls Eleven v4 a "net upgrade" over v3 in almost every case, with better voice accuracy and tag-following. Our dialogue requests currently use the API default, `eleven_v3`. Trying v4 on the pilot audition is an [open question](../status.md#open-questions): it costs a few credits and would settle whether the dialogue endpoint accepts it and how our voices sound with it.
+ElevenLabs calls Eleven v4 a "net upgrade" over v3 in almost every case, with better voice accuracy and tag-following. The user compared v3 and v4 takes of the pilot audition and chose v4 ([decision #19](../decisions.md)), so every request we build uses it. The v4 guidance above applies directly to our scripts.
 
 ## Practical habits
 

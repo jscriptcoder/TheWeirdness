@@ -13,6 +13,7 @@ The pilot is written and its three voices are cast and approved in a short audit
 | Three voices designed in the ElevenLabs app and recorded with their full prompts | [`voices/`](../voices), `npm run voices` |
 | Short three-voice audition generated and approved by the user ("This is excellent.") | [Episode 001: audition](../episodes/001-universe-customer-support/README.md#audio-status) |
 | Request files built from the script and cast, identical to the earlier hand-made ones | `npm run requests`; [commands](production/commands.md#npm-run-requests) |
+| Dialogue model chosen: Eleven v4, preferred by the user over v3 on the audition | [Decisions #19](decisions.md) |
 | Voice design tool; first live design succeeded (nothing saved) | `npm run voice:design`; [ElevenLabs reference](reference/elevenlabs.md#confirmed-live) |
 
 ## Next steps
@@ -27,8 +28,7 @@ The pilot is written and its three voices are cast and approved in a short audit
 
 These don't block preparation.
 
-- Should the pilot use **Eleven v4**? ElevenLabs now recommends it over v3, which our dialogue requests use by default. Whether Text to Dialogue accepts `eleven_v4` is untested.
-- Full-episode performance approval, pinned model and settings, and measured runtime.
+- Full-episode performance approval, synthesis settings, and measured runtime. (The model is decided: Eleven v4.)
 - Was the user's own-voice sample recorded or cloned, and is it related to The Weirdness v1?
 - Language and accent policy beyond the current English script and British casting.
 - Design model and preview text used for the three app-made voices (not recorded; the API doesn't return them).

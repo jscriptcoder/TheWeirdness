@@ -4,6 +4,10 @@ import { MAX_CHARACTERS, countCharacters, type DialogueRequest } from './dialogu
 import type { Result } from './json-file.ts';
 import { loadRegistry, type Voice } from './voices.ts';
 
+// Written into every request so a rebuild can't silently change the model.
+// The user chose Eleven v4 after comparing it with v3 on the pilot audition (2026-10-29).
+export const DIALOGUE_MODEL = 'eleven_v4';
+
 // Passage numbers count from 1 and include both ends.
 export type Excerpt = { from: number; to: number };
 
@@ -39,8 +43,8 @@ const pack = (inputs: DialogueRequest['inputs']): DialogueRequest[] =>
   inputs.reduce<DialogueRequest[]>((requests, input) => {
     const last = requests.at(-1);
     return last && countCharacters(last.inputs) + input.text.length <= MAX_CHARACTERS
-      ? [...requests.slice(0, -1), { inputs: [...last.inputs, input] }]
-      : [...requests, { inputs: [input] }];
+      ? [...requests.slice(0, -1), { model_id: DIALOGUE_MODEL, inputs: [...last.inputs, input] }]
+      : [...requests, { model_id: DIALOGUE_MODEL, inputs: [input] }];
   }, []);
 
 const castOf = (episode: string, voices: Voice[]) =>
@@ -94,7 +98,7 @@ const cut = (inputs: DialogueRequest['inputs'], { from, to }: Excerpt): BuildReq
       error: `Passages ${from}-${to} have ${total} characters; an audition must fit in one request of ${MAX_CHARACTERS} or fewer.`,
     };
   }
-  return { ok: true, requests: [{ inputs: chosen }] };
+  return { ok: true, requests: [{ model_id: DIALOGUE_MODEL, inputs: chosen }] };
 };
 
 export const buildRequests = ({ script, episode, voices, excerpt }: BuildRequestsOptions): BuildRequestsResult => {

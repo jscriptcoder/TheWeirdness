@@ -8,6 +8,8 @@ import type { Voice } from './voices.ts';
 const EPISODE = '001-universe-customer-support';
 const NARRATOR_ID = 'QdMPtN6UaliUKoCqMvVS';
 const MARA_ID = 'MatREvRtc5MgJoZ9A2cZ';
+// The user chose Eleven v4 for dialogue after comparing it with v3 on the pilot audition.
+const MODEL = 'eleven_v4';
 
 const getVoice = (overrides?: Partial<Voice>): Voice => ({
   slug: 'mara',
@@ -41,7 +43,7 @@ describe('buildRequests', () => {
       ok: true,
       requests: [
         {
-          inputs: [
+          model_id: MODEL, inputs: [
             { text: 'Mara stood very still.\n\nThen she spoke.', voice_id: NARRATOR_ID },
             { text: 'It isn\'t working.', voice_id: MARA_ID },
             { text: 'Daniel took a breath.', voice_id: NARRATOR_ID },
@@ -49,6 +51,14 @@ describe('buildRequests', () => {
         },
       ],
     });
+  });
+
+  it('names the dialogue model in every request, so a rebuild never silently changes it', () => {
+    const script = [passage('NARRATOR', 'a'.repeat(1500)), passage('MARA', 'b'.repeat(1500))].join('\n');
+
+    const result = buildRequests({ script, episode: EPISODE, voices: pilotVoices() });
+
+    expect(result.ok && result.requests.map((request) => request.model_id)).toEqual(['eleven_v4', 'eleven_v4']);
   });
 
   it('starts a new request rather than exceed 2,000 characters, never splitting a passage', () => {
@@ -65,13 +75,13 @@ describe('buildRequests', () => {
       ok: true,
       requests: [
         {
-          inputs: [
+          model_id: MODEL, inputs: [
             { text: 'a'.repeat(1000), voice_id: NARRATOR_ID },
             { text: 'b'.repeat(1000), voice_id: MARA_ID },
           ],
         },
         {
-          inputs: [
+          model_id: MODEL, inputs: [
             { text: 'c', voice_id: NARRATOR_ID },
             { text: 'd'.repeat(1999), voice_id: MARA_ID },
           ],
@@ -126,7 +136,7 @@ describe('buildRequests', () => {
       voices: pilotVoices(),
     });
 
-    expect(fits).toEqual({ ok: true, requests: [{ inputs: [{ text: 'a'.repeat(2000), voice_id: MARA_ID }] }] });
+    expect(fits).toEqual({ ok: true, requests: [{ model_id: MODEL, inputs: [{ text: 'a'.repeat(2000), voice_id: MARA_ID }] }] });
     expect(tooLong).toEqual({
       ok: false,
       error: 'Passage 2 (NARRATOR) has 2001 characters; split it so each passage has 2000 or fewer.',
@@ -157,7 +167,7 @@ describe('buildRequests', () => {
   it('allows blank lines before the first speaker label', () => {
     const result = buildRequests({ script: `\n\n${passage('MARA', 'Hello.')}`, episode: EPISODE, voices: pilotVoices() });
 
-    expect(result).toEqual({ ok: true, requests: [{ inputs: [{ text: 'Hello.', voice_id: MARA_ID }] }] });
+    expect(result).toEqual({ ok: true, requests: [{ model_id: MODEL, inputs: [{ text: 'Hello.', voice_id: MARA_ID }] }] });
   });
 
   describe('with an excerpt for an audition', () => {
@@ -175,7 +185,7 @@ describe('buildRequests', () => {
         ok: true,
         requests: [
           {
-            inputs: [
+            model_id: MODEL, inputs: [
               { text: 'Two.', voice_id: MARA_ID },
               { text: 'Three.', voice_id: NARRATOR_ID },
             ],
@@ -187,7 +197,7 @@ describe('buildRequests', () => {
     it('can be a single passage', () => {
       const result = buildRequests({ script, episode: EPISODE, voices: pilotVoices(), excerpt: { from: 4, to: 4 } });
 
-      expect(result).toEqual({ ok: true, requests: [{ inputs: [{ text: 'Four.', voice_id: MARA_ID }] }] });
+      expect(result).toEqual({ ok: true, requests: [{ model_id: MODEL, inputs: [{ text: 'Four.', voice_id: MARA_ID }] }] });
     });
 
     it('can run from the first passage to the last', () => {
@@ -256,7 +266,7 @@ describe('writeRequests', () => {
     });
     expect(await readdir(requests)).toEqual(['part-01.json', 'part-02.json']);
     expect(await readFile(join(requests, 'part-02.json'), 'utf8')).toBe(
-      `${JSON.stringify({ inputs: [{ text: 'b'.repeat(1500), voice_id: MARA_ID }] }, null, 2)}\n`,
+      `${JSON.stringify({ model_id: MODEL, inputs: [{ text: 'b'.repeat(1500), voice_id: MARA_ID }] }, null, 2)}\n`,
     );
   });
 
@@ -272,7 +282,7 @@ describe('writeRequests', () => {
 
     expect(result).toEqual({ ok: true, files: [{ path: audition, characters: 1500 }] });
     expect(JSON.parse(await readFile(audition, 'utf8'))).toEqual({
-      inputs: [{ text: 'b'.repeat(1500), voice_id: MARA_ID }],
+      model_id: MODEL, inputs: [{ text: 'b'.repeat(1500), voice_id: MARA_ID }],
     });
   });
 
@@ -307,7 +317,7 @@ describe('writeRequests', () => {
     expect(result).toEqual({ ok: false, error: expect.stringContaining(join('voices', 'broken.json')) });
   });
 
-  it("rebuilds the pilot's committed request files byte for byte from its script and cast", async () => {
+  it("keeps the pilot's committed request files exactly as a fresh build from its script and cast", async () => {
     const pilot = join('episodes', EPISODE);
     const read = (path: string) => readFile(path, 'utf8');
     const voiceFiles = (await readdir('voices')).filter((file) => file.endsWith('.json'));

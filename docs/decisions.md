@@ -24,6 +24,7 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 | 16 | **Voices are reusable actors.** A voice can play different characters in different stories when its description fits. The user may delete voices from ElevenLabs to free slots. | 2026-10-29 |
 | 17 | The user wants their own voice among the candidates. A reading passage was supplied; recording and cloning are unconfirmed. | 2026-10-29 |
 | 18 | Documentation lives in `docs/` as readable pages, kept current as the project progresses. This supersedes the earlier rule of a single handoff file. | 2026-10-29 |
+| 19 | Dialogue uses **Eleven v4** (`eleven_v4`). The user compared v4 and v3 takes of the pilot audition and preferred v4. `npm run requests` writes the model into every request. | 2026-10-29 |
 
 ## Proposals, not final
 
@@ -43,7 +44,8 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 - Runtimes of 12–20 or 18–22 minutes were replaced by the 10-minute rule (#7).
 - A branded intro before the story was replaced by the hook-first rule (#9).
 - The single handoff file (`The_Weirdness_Handoff.md`) was replaced by `docs/` (#18).
+- ElevenLabs' default dialogue model, `eleven_v3`, used for the first audition, was replaced by Eleven v4 (#19).
 
 ## Not decided yet
 
-Final voices and performance, model and synthesis settings, accent and language policy, channel handle, final avatar and style guide, upload cadence, budget, script sign-off, editor, music licensing, thumbnails, publication date, and monetisation.
+Final voices and performance, synthesis settings beyond the model, accent and language policy, channel handle, final avatar and style guide, upload cadence, budget, script sign-off, editor, music licensing, thumbnails, publication date, and monetisation.

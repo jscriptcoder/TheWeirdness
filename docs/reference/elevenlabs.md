@@ -8,7 +8,7 @@ The project calls the HTTP API directly (`https://api.elevenlabs.io/v1`) with th
 
 | Endpoint | Used by | Key facts |
 |---|---|---|
-| [`POST /v1/text-to-dialogue`](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert) | `npm run dialogue` | Ordered `inputs` of `text` + `voice_id`; at most 10 different voices per request; default model `eleven_v3` |
+| [`POST /v1/text-to-dialogue`](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert) | `npm run dialogue` | Ordered `inputs` of `text` + `voice_id`; at most 10 different voices per request; API default model `eleven_v3`, ours `eleven_v4` |
 | [`POST /v1/text-to-voice/design`](https://elevenlabs.io/docs/api-reference/text-to-voice/design) | `npm run voice:design` | Returns previews, each with `generated_voice_id` and base64 audio; charged for the preview text |
 | [`POST /v1/text-to-voice`](https://elevenlabs.io/docs/api-reference/text-to-voice/create) | `npm run voice:save` | Turns a `generated_voice_id` into a permanent voice; returns `voice_id`; uses one voice slot |
 | [`GET /v1/voices/{voice_id}`](https://elevenlabs.io/docs/api-reference/voices/get) | Manual checks only | Returns a voice's name, category, and stored description |
@@ -16,7 +16,7 @@ The project calls the HTTP API directly (`https://api.elevenlabs.io/v1`) with th
 ### Text to Dialogue
 
 - **Keep each request to 2,000 characters or fewer** in total across all inputs. This is ElevenLabs' [reliability recommendation](https://elevenlabs.io/docs/eleven-api/guides/cookbooks/text-to-dialogue): longer requests may stop early. Split longer scripts and join the audio afterwards. Our tools enforce it.
-- **Models:** the API spec gives no list of allowed models. The default is `eleven_v3`. ElevenLabs now recommends [Eleven v4](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/eleven-v4) (`eleven_v4`) for content creation, but whether this endpoint accepts it is untested.
+- **Models:** the API spec gives no list of allowed models. The default is `eleven_v3`. ElevenLabs now recommends [Eleven v4](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/eleven-v4) (`eleven_v4`) for content creation, and this endpoint accepts it (confirmed live on 2026-10-29). It's our dialogue model; `npm run requests` writes it into every request.
 - **Options useful for joining parts** (from the [OpenAPI spec](https://api.elevenlabs.io/openapi.json), not yet used):
   - `previous_text` and `future_text` (up to 100 characters each): text that comes before and after this request, for continuity;
   - `previous_request_ids` and `next_request_ids`: link to neighbouring generations;
@@ -59,11 +59,11 @@ Keys can also have a monthly credit limit, an IP allowlist, and an expiry date. 
 | 2026-10-29 | Pilot audition through Text to Dialogue, default model | HTTP 200; 459 characters; 520,820-byte MP3, about 32 seconds. All three voice IDs accepted. |
 | 2026-10-29 | `GET /v1/voices/{id}` for the three pilot voices | All exist, are `generated` voices, and their names match our records. |
 | 2026-10-29 | Stored voice descriptions | **Cut to about 500 characters**: 479, 471, and 500 for the narrator, Daniel, and Mara, each the exact start of the full prompt. Our voice records are the only full copy. |
+| 2026-10-29 | Pilot audition through Text to Dialogue with `model_id: eleven_v4` | HTTP 200; 459 characters; 575,990-byte MP3, about 36 seconds (v3: about 32). The user compared both and preferred v4. |
 | 2026-10-29 | Voice design with a throwaway draft (`eleven_ttv_v3`, 111-character preview text) | Three MP3 previews of 108–116 KB, about 7 seconds each. Nothing saved, so no slot used. |
 
 ## Not yet confirmed
 
 - Saving a designed voice, and whether its description is also cut to about 500 characters.
-- Whether Text to Dialogue accepts `eleven_v4`.
 - How long design previews remain available for saving.
 - The plan's voice-slot limit and credit quota.
