@@ -27,6 +27,7 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 | 19 | Dialogue uses **Eleven v4** (`eleven_v4`). The user compared v4 and v3 takes of the pilot audition and preferred v4. `npm run requests` writes the model into every request. | 2026-10-29 |
 | 20 | The pilot's narrator is **The Weirdness v2** (`WsYpHk0kX6vf3JCGTNbY`). The user found v1 "a bit boring" and asked for a different narrator for this story; Claude drafted the prompt at the user's request, and the user picked preview 1 of 3. After hearing the full episode: "I like the new narrator." | 2026-10-29 |
 | 21 | **Use audio tags** for vocal delivery and emotion, as the [best practices](reference/elevenlabs-best-practices.md#emotion-and-delivery) describe. The user suggested them, compared tagged and untagged takes of the pilot audition, and kept the tags. Tags go in the `[ROLE]` script only, not in `studio-text` files. | 2026-10-29 |
+| 22 | **Leave the pilot as it is, as a test story,** and work on a new story next. The rest of the pilot's script stays untagged for now. | 2026-10-29 |
 
 ## Proposals, not final
 

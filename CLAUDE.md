@@ -28,7 +28,7 @@ Full reference: [docs/production/commands.md](docs/production/commands.md).
 
 - Ask before any command that costs credits or voice slots, and before every commit.
 - Never edit `api/` request JSON by hand: change the script or cast, then rebuild with `npm run requests`.
-- Never invent voice prompts. Never print or commit the API key; it lives only in `.env`.
+- Don't invent voice prompts unasked: draft one for a new voice only when the user asks, and get approval before designing. Never reconstruct an existing voice's prompt. Never print or commit the API key; it lives only in `.env`.
 - You can't hear audio; the user's listening decides.
 - Update the docs in the same change as the work ([upkeep rules](docs/README.md#keeping-these-docs-current)). Date any claim about current state.
 - Git autocrlf is on: write files with LF line endings. Python's `write_text` on Windows writes CRLF; use `write_bytes`.

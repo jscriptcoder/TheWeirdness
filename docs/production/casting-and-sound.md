@@ -18,7 +18,7 @@ ElevenLabs' [voice design prompting guide](https://elevenlabs.io/docs/eleven-cre
 3. Timbre, texture, articulation, and pacing.
 4. What to avoid (for example: breathiness, melodrama, a presenter cadence).
 
-The three pilot prompts in [`voices/`](../../voices) are working examples. Keep the full prompt in the voice record, since ElevenLabs keeps only about 500 characters of it. Use a real line from the character's script as the preview text.
+The three pilot prompts in [`voices/`](../../voices) are working examples. Keep the full prompt in the voice record: ElevenLabs cut the app-made voices' descriptions to about 500 characters (voices saved through the API kept theirs in full). Use a real line from the character's script as the preview text.
 
 ## Narrator direction (proposed)
 

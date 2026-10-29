@@ -8,7 +8,7 @@ Nothing is published yet. See [where things stand](docs/status.md).
 
 ## The pilot
 
-**[The Universe Has a Customer Support Department](episodes/001-universe-customer-support/README.md)**: an accountant calls about a broken clock and learns her universe is being discontinued, and that she is classified as maintenance equipment. It's written for a narrator and two character voices. A short three-voice audition is approved; the full episode isn't produced yet.
+**[The Universe Has a Customer Support Department](episodes/001-universe-customer-support/README.md)**: an accountant calls about a broken clock and learns her universe is being discontinued, and that she is classified as maintenance equipment. It's written for a narrator and two character voices. A full test version, about 7 min 45 s, has been generated; the pilot is paused there while a new story is written.
 
 ## Quickstart
 

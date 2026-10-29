@@ -2,11 +2,11 @@
 
 How a story goes from a labelled script to audio. Each step names the command that does it; the [command reference](commands.md) lists every option and refusal.
 
-Steps 1–4 are built. Step 5, generating and joining the full episode, is only partly built: you can generate one part at a time, but nothing joins them yet.
+Steps 1–4 are built. Step 5 is partly built: the tool generates one request at a time, and joining the parts into one file is done by hand with ffmpeg.
 
 ## Before you start
 
-You need Node 22 or later and an ElevenLabs API key.
+You need Node 22 or later, an ElevenLabs API key, and [ffmpeg](https://ffmpeg.org) for joining and measuring audio (on Windows: `winget install Gyan.FFmpeg`, then open a new shell).
 
 ```sh
 npm install
@@ -36,6 +36,8 @@ Continuity Services. For local causality, press one.
 ```
 
 Labels are uppercase and are never spoken. Everything between two labels is one passage, and blank lines inside it are kept. A passage can be up to 2,000 characters. Follow the [story rules](../creative/vision.md) and ElevenLabs' [best practices](../reference/elevenlabs-best-practices.md) for text that performs well.
+
+Shape delivery with lowercase audio tags at the start of a sentence ([decision #21](../decisions.md)), for example `[dry, deadpan] I'll put that in the feedback.` Tags are sent as part of the text and count toward the 2,000 characters. A line holding only an uppercase bracket is read as a speaker label, so never write tags in capitals. The pilot's passages 6–15 are the worked example; see the [tagging style](../reference/elevenlabs-best-practices.md#emotion-and-delivery). If the story also gets an unlabelled `studio-text` file for manual work, keep tags out of it.
 
 ### 2. Cast every role
 
@@ -71,7 +73,7 @@ Write a draft in `voices/designs/<voice-name>.json`. The voice name is lowercase
 }
 ```
 
-`model_id` (default `eleven_ttv_v3`) and `seed` are optional. Never invent a prompt for an existing voice; record only prompts the user supplied or the tool actually sent.
+`model_id` (default `eleven_ttv_v3`) and `seed` are optional. The prompt comes from the user, or from an assistant **only when the user asks for one**, and the user approves it before any design run. Never invent or reconstruct a prompt for an existing voice; record only prompts the user supplied or the tool actually sent. The Weirdness v2's prompt is an example of one drafted on request ([decision #20](../decisions.md)).
 
 ```sh
 npm run voice:design -- archivist   # three previews in generated/voices/archivist/<timestamp>/
@@ -83,7 +85,7 @@ Listen to `preview-1.mp3` to `preview-3.mp3`. Designing costs credits for the pr
 npm run voice:save -- archivist 2   # saves preview 2 of the latest run
 ```
 
-This creates the voice in ElevenLabs (using one of the plan's voice slots) and writes `voices/archivist.json` with the full prompt. Commit that file.
+This creates the voice in ElevenLabs (using one of the plan's voice slots) and writes `voices/archivist.json` with the full prompt. Commit that file. The draft in `voices/designs/` can then be deleted: the record and `generated/voices/<voice-name>/<timestamp>/design.json` both hold what was sent.
 
 ### 4. Build the requests
 
@@ -99,7 +101,7 @@ To audition a short exchange before spending credits on the whole story, pick a 
 npm run requests -- episodes/<episode>/dialogue.txt --audition 6-15
 ```
 
-### 5. Generate and listen
+### 5. Generate, join, and listen
 
 ```sh
 npm run dialogue -- episodes/<episode>/api/audition-request.json
@@ -108,13 +110,24 @@ npm run dialogue -- episodes/<episode>/api/requests/part-01.json
 
 Each run saves `generated/<request-name>-<UTC timestamp>.mp3` and never overwrites an earlier take. Start with the audition, listen on headphones at normal and low volume, and adjust the casting or the text before generating every part. The assistant can't hear audio, so the user's listening decides.
 
-**Not built yet:** generating all parts in one go, joining them into one episode file, and measuring the runtime.
+Then join the parts by hand, in order, and measure the result. This is how the pilot's test episode was made:
+
+```sh
+ffmpeg -i generated/part-01-<stamp>.mp3 -i generated/part-02-<stamp>.mp3 \
+  -filter_complex "concat=n=2:v=0:a=1" -c:a libmp3lame -b:a 192k \
+  generated/episode-<number>-<stamp>.mp3
+ffprobe -v error -show_entries format=duration -of csv=p=0 generated/episode-<number>-<stamp>.mp3
+```
+
+Add one `-i` per part and set `n=` to the number of parts. The parts are decoded and re-encoded deliberately: joining the MP3 streams directly (`-f concat -c copy`) gave timestamp errors at each join, which can click.
+
+**Not built yet:** a command that generates every part and joins them in one go (pipeline step 4 in [Status](../status.md#next-steps)).
 
 ## Voice records
 
 Every voice ever created has a file in [`voices/`](../../voices), named by its voice name. It holds the ElevenLabs voice ID and display name, the **full** design prompt, creation date, origin (`elevenlabs-app` or `voice-design-api`), status (`active` or `deleted`), optional notes, and, for voices designed by the tool, the design model, preview text, and seed.
 
-- **The file is the only complete copy of the prompt.** ElevenLabs keeps only about the first 500 characters of a voice's description.
+- **The file is the only complete copy of the prompt for app-made voices.** ElevenLabs cut their stored descriptions to about 500 characters. Voices saved through `npm run voice:save` kept the full prompt (930 characters for The Weirdness v2), but the file stays the source of truth.
 - **Which episodes a voice appeared in is worked out** from the episodes' `cast.json` files, not kept by hand.
 - **Voice IDs and prompts aren't secrets** and are committed. The API key stays in `.env`.
 

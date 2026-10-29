@@ -7,6 +7,8 @@
 
 The pilot is fully written in two versions. Neither has final publication sign-off.
 
+**Paused as a test (2026-10-29).** The user left the pilot as it is to work on a new story ([decision #22](../../docs/decisions.md)). Only passages 6–15 of `dialogue-v2.txt` have audio tags, so the request files are built from a partly tagged script and the full-episode audio predates the tags.
+
 > The universe was being discontinued. Mara found out while trying to return a clock.
 
 That opening line is the hook, and it comes before any channel intro.

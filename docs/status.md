@@ -2,7 +2,7 @@
 
 **As of 2026-10-29.** Update this page whenever a step finishes or the plan changes.
 
-The pilot is written and cast, with a new narrator, The Weirdness v2. Its full audio has been generated and joined into one 7 min 45 s file as a test; the user likes the new narrator and says the story overall sounds good. Tools turn a script into ElevenLabs requests and design and save voices; joining the parts was done by hand with ffmpeg. Nothing has been published.
+The pilot is written, cast, and generated as a test: one 7 min 45 s file with a new narrator, The Weirdness v2, which the user likes. The user has **paused the pilot as it is** and wants to **work on a new story next** ([decision #22](decisions.md)). Tools turn a script into ElevenLabs requests and design and save voices; joining parts into one file is still done by hand with ffmpeg ([how](production/workflow.md#5-generate-join-and-listen)). Nothing has been published.
 
 ## Done
 
@@ -19,14 +19,18 @@ The pilot is written and cast, with a new narrator, The Weirdness v2. Its full a
 | Full pilot generated with Eleven v4 (four parts) and joined with ffmpeg: 464.8 s, about 7 min 45 s | [Episode 001: audio status](../episodes/001-universe-customer-support/README.md#audio-status) |
 | User listened to the full test episode: "I like the new narrator. The story overall sounds good." Not final approval: the user called it "just a test". | [Decisions #20](decisions.md) |
 | Audio tags tested on the pilot audition (passages 6–15) and kept by the user | [Decisions #21](decisions.md), [Episode 001: audio status](../episodes/001-universe-customer-support/README.md#audio-status) |
-| ffmpeg 9.0.2 installed on the user's machine (winget, `Gyan.FFmpeg`), for joining and measuring audio | `ffprobe` measured the audition takes: v3 32.48 s, v4 35.92 s |
+| ffmpeg 9.0.2 installed on the user's machine (winget, `Gyan.FFmpeg`), for joining and measuring audio. It's on the user's PATH for shells opened after the install. | `ffprobe` measured the audition takes: v3 32.48 s, v4 35.92 s |
 
 ## Next steps
 
-1. **Tag the rest of the pilot.** Passages 6–15 have audio tags ([decision #21](decisions.md)); the rest of `dialogue-v2.txt` doesn't yet. Draft tags for the user to review, then regenerate and listen to the full episode. Keep the instant hook, the human cost, and the unresolved final phone call. The untagged runtime was 7 min 45 s; tags slowed the audition by about 9%, so expect roughly 8.5 minutes, still inside the 10-minute limit.
+1. **Write episode 002, a new story.** The user hasn't chosen it yet; candidates are in [Story ideas](creative/story-ideas.md), and the user may bring their own. Follow the [story rules](creative/vision.md) and the [production workflow](production/workflow.md): script with `[ROLE]` labels and audio tags ([decision #21](decisions.md)), cast by reusing voices where they fit (`npm run voices`), design any new ones, audition, then generate. Ask before anything that costs credits or a voice slot.
 2. **Build full-episode generation (pipeline step 4).** Turn the by-hand steps into a command: generate every part, join them with ffmpeg, and measure the runtime. Consider the continuity options so transitions stay smooth; see [ElevenLabs reference](reference/elevenlabs.md#text-to-dialogue).
 3. **Sound and visuals.** Create or license the piano motif and ambience, choose an editor, then make the avatar, thumbnail, and video scenes.
 4. **Plan a small follow-up slate and learn from release.** Cadence and audience metrics matter once the first production works.
+
+## Paused: the pilot
+
+Left as it is on 2026-10-29 ([decision #22](decisions.md)). When it resumes: tag the rest of `dialogue-v2.txt` (only passages 6–15 have tags), regenerate, and listen. The untagged runtime was 7 min 45 s; tags slowed the audition by about 9%, so expect roughly 8.5 minutes. Then sound and visuals. Details: [Episode 001](../episodes/001-universe-customer-support/README.md#audio-status).
 
 ## Open questions
 
