@@ -56,7 +56,7 @@ v2 differs from v1 in three ways: it removes redundant dialogue attribution, has
 
 | Role | Voice | Direction (proposed) |
 |---|---|---|
-| Narrator | [The Weirdness v1](../../voices/the-weirdness-v1.json) | Calm, warm, quietly curious. Carries description, thoughts, the text message, and on-screen text. |
+| Narrator | [The Weirdness v1](../../voices/the-weirdness-v1.json) (working candidate; may be replaced before full generation) | Calm, warm, quietly curious. Carries description, thoughts, the text message, and on-screen text. |
 | Mara | [Mara](../../voices/mara.json) | Practical and sceptical, then vulnerable and determined; natural conversation, not presenter delivery. |
 | Daniel | [Daniel - Customer support](../../voices/daniel.json) | Courteous, weary, dry, gradually compassionate. Also voices the recorded phone menu, brighter and more uniform, so no fourth actor is needed. |
 
@@ -66,5 +66,5 @@ Keep loudness comparable across voices. Avoid a trailer voice, forced whispering
 
 - **Audition (2026-10-29):** passages 6–15, from "Continuity Services. Daniel speaking." to "Your universe. Thursday, seven fourteen.", were generated with ElevenLabs' default model (`eleven_v3`). The result was about 32 seconds of audio. The user's verdict: "This is excellent." This approves the three-voice combination, not the full episode.
 - **Eleven v4 take (2026-10-29):** the same passages with `model_id: eleven_v4` gave about 36 seconds of audio (`generated/audition-request-eleven-v4-20261029-215852.mp3`, not committed). The user preferred it to the v3 take, so the pilot's requests now use Eleven v4.
-- **Full episode:** not generated. The four parts total 6,421 characters; at the audition's rate that's roughly 7.5 minutes, an estimate rather than a measurement.
+- **Full episode:** not generated; waiting until the narrator is settled ([status](../../docs/status.md#next-steps)). The four parts total 6,421 characters; at the audition's rate that's roughly 7.5 minutes, an estimate rather than a measurement.
 - **Not done:** full-episode generation and assembly, pronunciation pass, music (the mother's five-note motif needs to be original or licensed), ambience, mix, and video.

@@ -18,7 +18,7 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 | 10 | **ElevenLabs** is the voice platform. The user pays for an entry-level plan; don't suggest signing up again. | 2026-10-28 |
 | 11 | The voice experience should be relaxing, mysterious, absorbing, and engaging: "almost hypnotic". | 2026-10-29 |
 | 12 | One narrator wasn't engaging enough. The pilot uses **a narrator plus two character voices**. Don't default back to a single narrator. | 2026-10-29 |
-| 13 | Voices: Narrator `QdMPtN6UaliUKoCqMvVS` (The Weirdness v1), Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. Their prompts are recorded in [`voices/`](../voices). The narrator remains a working candidate, not a final lock. | 2026-10-29 |
+| 13 | Voices: Narrator `QdMPtN6UaliUKoCqMvVS` (The Weirdness v1), Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. Their prompts are recorded in [`voices/`](../voices). The narrator remains a working candidate, not a final lock; the user isn't sure about it and may replace it before the full episode is generated. | 2026-10-29 |
 | 14 | The short three-voice audition is approved ("This is excellent."). This is not sign-off on the full episode. | 2026-10-29 |
 | 15 | **Automate stories and voices.** For each new story, every role either reuses an existing voice or gets a new one designed from a prompt. Every voice and its prompt is tracked. | 2026-10-29 |
 | 16 | **Voices are reusable actors.** A voice can play different characters in different stories when its description fits. The user may delete voices from ElevenLabs to free slots. | 2026-10-29 |
