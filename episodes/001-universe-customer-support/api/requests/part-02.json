@@ -2,6 +2,14 @@
   "model_id": "eleven_v4",
   "inputs": [
     {
+      "text": "May I suspend your local environment for three seconds?",
+      "voice_id": "I3zRwk5thDbzYVt0LM9j"
+    },
+    {
+      "text": "You may leave me alone.",
+      "voice_id": "MatREvRtc5MgJoZ9A2cZ"
+    },
+    {
       "text": "The pigeon stopped.\n\nA falling feather hung beside it.\n\nMara counted. One. Two. Three.\n\nThe feather continued down.\n\nShe pulled a chair out and sat carefully, missing the seat with her first attempt.\n\nDaniel waited.",
       "voice_id": "WsYpHk0kX6vf3JCGTNbY"
     },
@@ -156,10 +164,6 @@
     {
       "text": "Did she know what I was?",
       "voice_id": "MatREvRtc5MgJoZ9A2cZ"
-    },
-    {
-      "text": "There are no records of her knowing.",
-      "voice_id": "I3zRwk5thDbzYVt0LM9j"
     }
   ]
 }

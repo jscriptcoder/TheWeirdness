@@ -21,7 +21,7 @@ Our dialogue model, Eleven v4 (`eleven_v4`), like v3 before it, is prompted with
 - **Narrative context works too** ("she asked, her voice trembling"), but the model will speak those words.
 - **Capitals add emphasis.** Use them sparingly.
 
-**For us:** tags could add restraint and timing, for example `[quietly]` or `[dry]` for Daniel's administrative lines, without changing the spoken words. Write tags in lowercase inside a passage, such as `[quietly] Thursday, seven fourteen.`, and they're sent to ElevenLabs as part of the text. A line holding only an uppercase bracket, such as `[PAUSE]`, is read as a speaker label, and the build refuses it as an uncast role. **Test tags in an audition before using them across a story**, and keep them out of `studio-text` files meant for manual work.
+**For us:** tags could add restraint and timing, for example `[quietly]` or `[dry]` for Daniel's administrative lines, without changing the spoken words. Write tags in lowercase inside a passage, such as `[quietly] Thursday, seven fourteen.`, and they're sent to ElevenLabs as part of the text. A line holding only an uppercase bracket, such as `[PAUSE]`, is read as a speaker label, and the build refuses it as an uncast role. **Test tags in an audition before using them across a story**, and keep them out of `studio-text` files meant for manual work. The pilot's passages 6–15 show the style the user kept ([decision #21](../decisions.md)): short voice-quality phrases such as `[dry, deadpan]` or `[gently, with reluctant sympathy]`, at most two per passage, and none where the text already implies the action ("Daniel took a breath."). Tags count toward the 2,000-character limit.
 
 ## Pronunciation and text normalisation
 

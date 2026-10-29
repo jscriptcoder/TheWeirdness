@@ -2,6 +2,10 @@
   "model_id": "eleven_v4",
   "inputs": [
     {
+      "text": "There are no records of her knowing.",
+      "voice_id": "I3zRwk5thDbzYVt0LM9j"
+    },
+    {
       "text": "Mara remembered sitting beside her on the piano stool, their legs touching. Her mother guiding one small finger onto a key.\n\nShe let herself stay there for a moment.\n\nThen she looked at the laptop.\n\nAt the bottom of the page was a button.\n\nReport an error.\n\nShe clicked it and read the heading.",
       "voice_id": "WsYpHk0kX6vf3JCGTNbY"
     },
@@ -147,14 +151,6 @@
     },
     {
       "text": "Yes.",
-      "voice_id": "I3zRwk5thDbzYVt0LM9j"
-    },
-    {
-      "text": "Exactly as it is.",
-      "voice_id": "MatREvRtc5MgJoZ9A2cZ"
-    },
-    {
-      "text": "Of course.",
       "voice_id": "I3zRwk5thDbzYVt0LM9j"
     }
   ]

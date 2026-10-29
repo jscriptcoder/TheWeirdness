@@ -62,6 +62,7 @@ Keys can also have a monthly credit limit, an IP allowlist, and an expiry date. 
 | 2026-10-29 | Pilot audition through Text to Dialogue with `model_id: eleven_v4` | HTTP 200; 459 characters; 575,990-byte MP3, about 36 seconds (v3: about 32). The user compared both and preferred v4. |
 | 2026-10-29 | Saving a designed voice (The Weirdness v2, preview 1) | HTTP 200; returned voice ID `WsYpHk0kX6vf3JCGTNbY`; one slot used. The stored description is the **full 930-character prompt**, so saves through the API aren't cut like the app-made voices. |
 | 2026-10-29 | Full pilot through Text to Dialogue with `eleven_v4`, four parts | All HTTP 200: 1,801 / 1,934 / 1,983 / 703 characters gave 131.1 / 137.9 / 143.7 / 52.1 seconds (464.8 s in total, about 16.6 characters per second). |
+| 2026-10-29 | Pilot audition with and without audio tags, `eleven_v4`, narrator v2 | Both HTTP 200. Untagged: 459 characters, 35.0 s. Tagged: 701 characters (tags count as characters), 38.0 s. The user kept the tags. |
 | 2026-10-29 | Voice design with a throwaway draft (`eleven_ttv_v3`, 111-character preview text) | Three MP3 previews of 108–116 KB, about 7 seconds each. Nothing saved, so no slot used. |
 
 ## Not yet confirmed

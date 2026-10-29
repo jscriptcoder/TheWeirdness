@@ -2,35 +2,35 @@
   "model_id": "eleven_v4",
   "inputs": [
     {
-      "text": "Continuity Services. Daniel speaking.",
+      "text": "[polite, slightly weary] Continuity Services. Daniel speaking.",
       "voice_id": "I3zRwk5thDbzYVt0LM9j"
     },
     {
-      "text": "Where did you get that music?",
+      "text": "[sharp, unsettled] Where did you get that music?",
       "voice_id": "MatREvRtc5MgJoZ9A2cZ"
     },
     {
-      "text": "It's selected from the caller's memories. Familiarity reduces distress.",
+      "text": "[calm, as if reciting policy] It's selected from the caller's memories. Familiarity reduces distress.",
       "voice_id": "I3zRwk5thDbzYVt0LM9j"
     },
     {
-      "text": "Mara stood very still.",
+      "text": "[low, slower] Mara stood very still.",
       "voice_id": "WsYpHk0kX6vf3JCGTNbY"
     },
     {
-      "text": "It isn't working.",
+      "text": "[quietly, voice tight] It isn't working.",
       "voice_id": "MatREvRtc5MgJoZ9A2cZ"
     },
     {
-      "text": "I'll put that in the feedback.",
+      "text": "[dry, deadpan] I'll put that in the feedback.",
       "voice_id": "I3zRwk5thDbzYVt0LM9j"
     },
     {
-      "text": "She opened the warranty website on her laptop. The familiar logo appeared, then vanished.\n\nContinuity Services. Retirement in progress.\n\nBelow it was her address.",
+      "text": "She opened the warranty website on her laptop. The familiar logo appeared, then vanished.\n\n[flat, reading from the screen] Continuity Services. Retirement in progress.\n\n[lower, with quiet unease] Below it was her address.",
       "voice_id": "WsYpHk0kX6vf3JCGTNbY"
     },
     {
-      "text": "What exactly are you retiring?",
+      "text": "[carefully controlled] What exactly are you retiring?",
       "voice_id": "MatREvRtc5MgJoZ9A2cZ"
     },
     {
@@ -38,7 +38,7 @@
       "voice_id": "WsYpHk0kX6vf3JCGTNbY"
     },
     {
-      "text": "Your universe. Thursday, seven fourteen.",
+      "text": "[gently, with reluctant sympathy] Your universe. Thursday, seven fourteen.",
       "voice_id": "I3zRwk5thDbzYVt0LM9j"
     }
   ]
