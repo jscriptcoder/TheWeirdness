@@ -1,0 +1,9 @@
+{
+  "voice_id": "MatREvRtc5MgJoZ9A2cZ",
+  "name": "Mara",
+  "prompt": "Native English, subtle southern British English accent. Female, 35-45. Studio quality. Persona: practical, perceptive everyday person. Emotion: attentive, skeptical, emotionally honest. A clear, warm mid-range voice with natural texture and easy conversational articulation. Speaks directly, with responsive phrasing, understated dry humor, and enough variation to make short questions feel like genuine reactions. Capable of quiet vulnerability and firm resolve while maintaining comfortable volume. Fully voiced, with restrained emotion; avoid breathy whispering, melodrama, and a soothing presenter cadence.",
+  "created": "2026-10-29",
+  "origin": "elevenlabs-app",
+  "status": "active",
+  "notes": "Approved by the user in the three-voice pilot audition (2026-10-29)."
+}

@@ -1,0 +1,9 @@
+{
+  "voice_id": "QdMPtN6UaliUKoCqMvVS",
+  "name": "The Weirdness v1",
+  "prompt": "Native English, subtle southern British English accent. Male, 40–50. Studio quality. Persona: intimate storyteller, thoughtful companion. Emotion: calm, curious, quietly amused.\n\nA warm, smooth, gently resonant baritone with a soft texture and clear, effortless articulation. Speaks as though sharing a fascinating secret with one listener, with relaxed conversational pacing, a gently absorbing rhythm, and small, natural variations in pitch and emphasis that sustain attention. Brief, purposeful pauses let unusual details register. Conveys mystery through understated curiosity, with restrained emotional depth and occasional dry humor. Comfortable, steady volume suitable for bedtime listening. Fully voiced rather than whispered; natural rather than theatrical. Avoid exaggerated bass, breathiness, ominous growling, sing-song delivery, and prolonged pauses.",
+  "created": "2026-10-29",
+  "origin": "elevenlabs-app",
+  "status": "active",
+  "notes": "Channel narrator candidate. Approved by the user in the three-voice pilot audition (2026-10-29)."
+}

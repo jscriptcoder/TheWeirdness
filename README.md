@@ -40,6 +40,14 @@ Each run saves `generated/<request-name>-<UTC timestamp>.mp3`. Missing keys, inv
 
 ElevenLabs onboarding was attempted on 2026-10-29 but could not download the CLI because the execution environment refused the npm registry connection. Authentication and SDK installation remain unfinished.
 
+## Voices
+
+Every voice created for the channel has a record in [`voices/`](voices): its ElevenLabs voice ID, display name, full design prompt, status and notes. ElevenLabs keeps only about 500 characters of a prompt, so these files are the complete record. Each episode's `cast.json` maps its script roles to voice records, and a voice can be reused across stories.
+
+```sh
+npm run voices   # list every voice, its prompt, and where it appears
+```
+
 ## Visual references
 
 [Avatar concept](assets/avatar-concept-01.png) and [alternative directions](assets/avatar-alternatives-sheet.png) are explorations. No final avatar is selected.

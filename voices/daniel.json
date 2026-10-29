@@ -1,0 +1,9 @@
+{
+  "voice_id": "I3zRwk5thDbzYVt0LM9j",
+  "name": "Daniel - Customer support",
+  "prompt": "Native English, subtle southern British English accent. Male, 40-55. Studio quality. Persona: experienced, conscientious support agent. Emotion: courteous, patient, quietly weary. A clear, lightly textured mid-range tenor with a modest vocal weight and natural conversational rhythm. His manner is professionally helpful, with dry humor delivered sincerely and without comic emphasis. Can shift gradually from routine efficiency to hesitant concern and gentle compassion. Comfortable, consistent volume and crisp articulation. Avoid deep announcer resonance, exaggerated tiredness, robotic monotony, sinister delivery, and theatrical character acting.",
+  "created": "2026-10-29",
+  "origin": "elevenlabs-app",
+  "status": "active",
+  "notes": "Approved by the user in the three-voice pilot audition (2026-10-29)."
+}

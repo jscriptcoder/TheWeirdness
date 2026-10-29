@@ -8,6 +8,7 @@
   "scripts": {
     "audition": "tsx src/cli.ts episodes/001-universe-customer-support/api/audition-request.json",
     "dialogue": "tsx src/cli.ts",
+    "voices": "tsx src/voices-cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc"
