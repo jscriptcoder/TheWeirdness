@@ -22,7 +22,9 @@ The three pilot prompts in [`voices/`](../../voices) are working examples. Keep 
 
 ## Narrator direction (proposed)
 
-Intimate, intelligent, mildly conspiratorial, with restrained humour: as if sharing a fascinating secret with one listener. Steady, comfortable volume for bedtime. Fully voiced, not whispered; natural, not theatrical. Avoid exaggerated bass, ominous growling, sing-song delivery, and long pauses. The narrator's confirmed design prompt is in [`the-weirdness-v1.json`](../../voices/the-weirdness-v1.json).
+Intimate, intelligent, and wry: a storyteller who relishes the absurd and leans in for the strange details. Varied pace and pitch with deadpan timing, so it stays absorbing rather than sleepy. Comfortable volume; fully voiced, not whispered; natural, not theatrical. Avoid monotone delivery, sing-song rhythm, melodrama, and an announcer cadence.
+
+The first narrator, [The Weirdness v1](../../voices/the-weirdness-v1.json), asked for a calm, smooth, steady delivery; the user found it "a bit boring". The pilot now uses [The Weirdness v2](../../voices/the-weirdness-v2.json), whose prompt asks for more variation ([decision #20](../decisions.md)).
 
 Earlier labels such as "Midnight Storyteller", "Unreliable Witness", and "Cosmic Observer" were audition ideas, not saved voices.
 

@@ -7,7 +7,7 @@ USER-SUPPLIED VOICE MAPPING
 Narrator: QdMPtN6UaliUKoCqMvVS
 Daniel: I3zRwk5thDbzYVt0LM9j
 Mara: MatREvRtc5MgJoZ9A2cZ
-These IDs were verified against the account on 2026-10-29. The voice registry in voices/ is now the source of truth for voice IDs and design prompts (npm run voices), and the pilot's casting is in cast.json. The user confirmed that the Mara and Daniel design prompts below are the ones they used; the narrator's prompt is in voices/the-weirdness-v1.json.
+These IDs were verified against the account on 2026-10-29. The voice registry in voices/ is now the source of truth for voice IDs and design prompts (npm run voices), and the pilot's casting is in cast.json. The user confirmed that the Mara and Daniel design prompts below are the ones they used; the narrator's prompt is in voices/the-weirdness-v1.json. On 2026-10-29 the pilot's narrator was recast to The Weirdness v2 (voices/the-weirdness-v2.json); the narrator ID above is the original casting.
 
 API REQUEST DATA
 cast.json stores the role assignments. The request files are generated from dialogue-v2.txt and cast.json with npm run requests (see docs/production/commands.md); do not edit them by hand. api/audition-request.json contains the first live support exchange (passages 6-15) with explicit voice_id values. api/requests/part-01.json through part-04.json contain the full story in order, each within the documented 2,000-text-character recommendation. Each request file is a JSON body for POST https://api.elevenlabs.io/v1/text-to-dialogue, not a Studio import file. Send them with npm run dialogue (see docs/production/commands.md). Audio assembly is still needed.

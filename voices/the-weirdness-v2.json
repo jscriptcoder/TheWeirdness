@@ -1,0 +1,12 @@
+{
+  "voice_id": "WsYpHk0kX6vf3JCGTNbY",
+  "name": "The Weirdness v2",
+  "prompt": "Native English, southern British English accent. Female, 50–60. Studio quality. Persona: a sharp, wry storyteller who has seen something impossible and can't wait to tell you. Emotion: intrigued, mischievous, quietly delighted by the absurd, capable of sudden tenderness.\n\nA low, rich alto with a slightly husky, characterful texture and crisp, precise diction. Close and intimate, as if leaning in across a kitchen table late at night. Lively, varied pacing: quickens with curiosity, slows and drops lower for strange or heavy details, and lands dry lines with deadpan timing. Clear shifts in pitch and colour keep every sentence alive, with an audible smile in the wry moments. Absorbing and hypnotic rather than sleepy; engaged, never flat. Comfortable, steady volume. Natural rather than theatrical. Avoid monotone delivery, breathiness, whispering, sing-song rhythm, melodrama, and an announcer or audiobook-narrator cadence.",
+  "created": "2026-10-29",
+  "origin": "voice-design-api",
+  "status": "active",
+  "design": {
+    "model_id": "eleven_ttv_v3",
+    "preview_text": "The universe was being discontinued. Mara found out while trying to return a clock. Every morning, it skipped from seven fourteen and two seconds to seven fourteen and four. She changed the battery. She bought another clock. Both skipped the same second. Then a message arrived from her own number. Please stop noticing. Mara was an accountant. She kept receipts. She did not appreciate being threatened by a timekeeping problem."
+  }
+}

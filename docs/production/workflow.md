@@ -51,7 +51,7 @@ Then write `episodes/<episode>/cast.json`, mapping each role to a voice's file n
 
 ```json
 {
-  "NARRATOR": "the-weirdness-v1",
+  "NARRATOR": "the-weirdness-v2",
   "MARA": "mara",
   "DANIEL": "daniel"
 }

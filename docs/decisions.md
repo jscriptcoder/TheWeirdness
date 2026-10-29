@@ -18,13 +18,14 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 | 10 | **ElevenLabs** is the voice platform. The user pays for an entry-level plan; don't suggest signing up again. | 2026-10-28 |
 | 11 | The voice experience should be relaxing, mysterious, absorbing, and engaging: "almost hypnotic". | 2026-10-29 |
 | 12 | One narrator wasn't engaging enough. The pilot uses **a narrator plus two character voices**. Don't default back to a single narrator. | 2026-10-29 |
-| 13 | Voices: Narrator `QdMPtN6UaliUKoCqMvVS` (The Weirdness v1), Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. Their prompts are recorded in [`voices/`](../voices). The narrator remains a working candidate, not a final lock; the user isn't sure about it and may replace it before the full episode is generated. | 2026-10-29 |
+| 13 | Voices: Narrator `QdMPtN6UaliUKoCqMvVS` (The Weirdness v1), Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. Their prompts are recorded in [`voices/`](../voices). The narrator was later replaced (#20). | 2026-10-29 |
 | 14 | The short three-voice audition is approved ("This is excellent."). This is not sign-off on the full episode. | 2026-10-29 |
 | 15 | **Automate stories and voices.** For each new story, every role either reuses an existing voice or gets a new one designed from a prompt. Every voice and its prompt is tracked. | 2026-10-29 |
 | 16 | **Voices are reusable actors.** A voice can play different characters in different stories when its description fits. The user may delete voices from ElevenLabs to free slots. | 2026-10-29 |
 | 17 | The user wants their own voice among the candidates. A reading passage was supplied; recording and cloning are unconfirmed. | 2026-10-29 |
 | 18 | Documentation lives in `docs/` as readable pages, kept current as the project progresses. This supersedes the earlier rule of a single handoff file. | 2026-10-29 |
 | 19 | Dialogue uses **Eleven v4** (`eleven_v4`). The user compared v4 and v3 takes of the pilot audition and preferred v4. `npm run requests` writes the model into every request. | 2026-10-29 |
+| 20 | The pilot's narrator is **The Weirdness v2** (`WsYpHk0kX6vf3JCGTNbY`). The user found v1 "a bit boring" and asked for a different narrator for this story; Claude drafted the prompt at the user's request, and the user picked preview 1 of 3. Whether it works across the full episode is the user's call after listening. | 2026-10-29 |
 
 ## Proposals, not final
 
@@ -45,6 +46,7 @@ What the user has confirmed, what remains a proposal, and what hasn't been decid
 - A branded intro before the story was replaced by the hook-first rule (#9).
 - The single handoff file (`The_Weirdness_Handoff.md`) was replaced by `docs/` (#18).
 - ElevenLabs' default dialogue model, `eleven_v3`, used for the first audition, was replaced by Eleven v4 (#19).
+- The Weirdness v1 (`QdMPtN6UaliUKoCqMvVS`) as the pilot's narrator was replaced by The Weirdness v2 (#20). The voice still exists in ElevenLabs.
 
 ## Not decided yet
 
