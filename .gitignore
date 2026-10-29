@@ -1,0 +1,36 @@
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Dependencies and package caches
+node_modules/
+.npm-cache/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Generated production media
+generated/
+outputs/
+*-github-upload.zip
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.ogg
+*.opus
+*.mp4
+*.mov
+*.webm
+
+# Local editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log

@@ -1,0 +1,44 @@
+THE WEIRDNESS - PILOT THREE-VOICE AUDITION
+
+STATUS
+The user tried the story with one voice and wants a narrator plus two character voices. They have now supplied all three role-to-voice-ID assignments for the combined audition. Final performance approval is still pending. No multi-voice audio has been generated as part of this adaptation.
+
+USER-SUPPLIED VOICE MAPPING
+Narrator: QdMPtN6UaliUKoCqMvVS
+Daniel: I3zRwk5thDbzYVt0LM9j
+Mara: MatREvRtc5MgJoZ9A2cZ
+These identifiers have been recorded as supplied, not verified against the account through the API. The narrator's working candidate name is The Weirdness v1. The proposed casting prompts below remain references, not verified descriptions of the chosen voices.
+
+API REQUEST DATA
+api/voice-map.json stores the role assignments. api/audition-request.json contains the first live support exchange with explicit voice_id values. api/requests/part-01.json through part-04.json contain the full story in order, each within the documented 2,000-text-character recommendation. Each request file is a JSON body for POST https://api.elevenlabs.io/v1/text-to-dialogue, not a Studio import file. An authenticated sender and audio assembly are still needed; no API key or generation tool is configured here, and no paid requests have been made.
+
+FILES
+dialogue-v2.txt: Production reference with speaker labels. Labels are not spoken text and do not automatically assign ElevenLabs voices.
+studio-text-v2.txt: Matching spoken text without labels, ready to import and assign voices using dialogue-v2.txt as the reference.
+narration-v1.txt: Original single-narrator draft, retained for comparison.
+
+NARRATOR - THE WEIRDNESS V1
+The narrator carries descriptions, thoughts, the incoming text message, and all on-screen writing. Keep the warmth, quiet curiosity, and restrained humor. Use conversational flow between story beats; reserve longer pauses for discoveries and the final line. Leave character emotion to Mara and Daniel rather than adding a dramatic commentary to every exchange.
+
+MARA - VOICE DESIGN PROMPT
+Native English, subtle southern British English accent. Female, 35-45. Studio quality. Persona: practical, perceptive everyday person. Emotion: attentive, skeptical, emotionally honest. A clear, warm mid-range voice with natural texture and easy conversational articulation. Speaks directly, with responsive phrasing, understated dry humor, and enough variation to make short questions feel like genuine reactions. Capable of quiet vulnerability and firm resolve while maintaining comfortable volume. Fully voiced, with restrained emotion; avoid breathy whispering, melodrama, and a soothing presenter cadence.
+
+MARA - PERFORMANCE ARC
+Begin with irritation and disbelief. After the suspended pigeon, become quieter and more careful. "Transfer me" is direct and urgent. "You wouldn't be creating one" is a firm correction. The mother questions are personal, with less defensive certainty. Her recorded statement becomes steady through effort. Deliver the final reference-number joke with a small return of her earlier practicality.
+
+DANIEL - VOICE DESIGN PROMPT
+Native English, subtle southern British English accent. Male, 40-55. Studio quality. Persona: experienced, conscientious support agent. Emotion: courteous, patient, quietly weary. A clear, lightly textured mid-range tenor with a modest vocal weight and natural conversational rhythm. His manner is professionally helpful, with dry humor delivered sincerely and without comic emphasis. Can shift gradually from routine efficiency to hesitant concern and gentle compassion. Comfortable, consistent volume and crisp articulation. Avoid deep announcer resonance, exaggerated tiredness, robotic monotony, sinister delivery, and theatrical character acting.
+
+DANIEL - PERFORMANCE ARC
+Use the same voice for the opening recorded menu, with brighter, more even delivery; no fourth actor is needed. His live greeting sounds routine. The six-hundred-year wait is an ordinary service update. His certainty falters while checking Mara's record. From "According to your record" onward, let politeness become personal concern. He is constrained by the system, not enjoying her predicament. The final "Yes" follows a small, sympathetic almost-laugh.
+
+ASSEMBLY
+Use three voice identities throughout. Keep dialogue responsive and the voices at comparable perceived loudness. Avoid a long automatic pause at every change of speaker. Use the narrator's action beats to create breathing room. Preserve all essential information in speech, including the text message, website notices, and checkbox.
+
+In ElevenLabs Studio, assign the appropriate voice to each text selection. Speaker labels in a plain text file are an editing reference, not guaranteed casting instructions. Import studio-text-v2.txt for a label-free starting point and consult dialogue-v2.txt when assigning voices. If using separate TTS generations instead, copy only the spoken text under the relevant label and assemble the results in story order.
+
+FIRST COMBINED TEST
+Before regenerating the entire story, test the passage from Daniel's live greeting ("Continuity Services. Daniel speaking.") through his announcement "Your universe. Thursday, seven fourteen." This includes all three voices, banter, an emotional cue, and a revelation. Judge the assembled conversation, including turn spacing, rather than the voices only in isolation.
+
+CHANGES FROM V1
+Separated narrator, Mara, and Daniel. Removed redundant dialogue attribution where the voices identify speakers. Made Mara's typed complaint explicitly read aloud so it has a clear speaker. Converted screen text to normal sentence case for narration. Preserved the plot and ending.
