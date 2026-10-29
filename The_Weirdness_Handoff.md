@@ -1,15 +1,14 @@
 # THE WEIRDNESS — Creative Project Handoff
 
-**Version:** 1.4  
-**Date:** 2026-10-29  
+**Last updated:** 2026-10-29  
 **Purpose:** Give another AI model or creative collaborator enough context to continue developing *The Weirdness* without the original chat history.  
 **Project stage:** Pilot scripting and voice auditions. A complete single-narrator pilot draft and a three-voice adaptation exist. The user created a candidate voice named **The Weirdness v1**, tried the story with one voice, and requested a narrator plus two character voices because the single-voice result was not engaging enough. Multi-voice audio, final casting, API automation, and publication are not yet documented.
 
-**Current handoff:** Use this v1.4 document for ongoing work. [v1.3](The_Weirdness_Handoff_v1.3.md) is preserved as a historical snapshot. The script files linked in Section 5 contain the actual current story; older outline beats are not binding.
+**Current handoff:** Maintain this single file, `The_Weirdness_Handoff.md`, in place. Git history preserves earlier states; do not create numbered handoff copies. The script files linked in Section 5 contain the actual current story; older outline beats are not binding.
 
 **GitHub repository:** The user created the public repository [jscriptcoder/TheWeirdness](https://github.com/jscriptcoder/TheWeirdness). The repository is for project development; it does not mean the YouTube channel has launched. Root `README.md` provides a file guide, and `.gitignore` excludes credentials, caches, and generated media.
 
-**Repository sync status (2026-10-29):** The user initialized the local Git repository, added `origin`, and pushed the first README commit (`4897874`) to `main`; the GitHub connector independently confirmed that remote head. The remaining project files are prepared locally. Agent-side shell requests to GitHub still fail through a refused proxy connection, and a renewed connector write attempt returned HTTP 403, “Resource not accessible by integration.” The user's own terminal can push; this does not establish agent-side network/write access. Verify the remote head and file tree before reporting that the complete project has been published. The README's accidental UTF-16 suffix from PowerShell `echo` was removed so the file is again UTF-8 text.
+**Repository sync status (2026-10-29):** The user pushed the initial README commit (`4897874`) and then the complete project files in commit `17b68d1` on `main`. Agent-side shell requests to GitHub failed through a refused proxy connection, writes to the local Git index were denied, and a connector write attempt returned HTTP 403, “Resource not accessible by integration.” The user's terminal can commit and push; this does not establish agent-side network/write access. This consolidation to one handoff is a local change until committed and pushed. The README's accidental UTF-16 suffix from PowerShell `echo` was removed so the file is again UTF-8 text.
 
 **Latest changes (2026-10-29):** Full pilot written; The Weirdness v1 auditioned as a candidate; three-voice treatment prepared; the user supplied Narrator, Daniel, and Mara voice IDs. Role mapping, a short audition request, and four full-story API request bodies are prepared. API generation and audio assembly are not implemented or run.
 
@@ -73,6 +72,7 @@ These slogans were proposed and positively received in the broader discussion, b
 15. **NEW (2026-10-29) — Own-voice audition interest:** The user wants their own voice among the candidates and requested reading material for a roughly three-minute cloning sample. A passage was supplied in chat; recording, cloning completion, and its relationship to The Weirdness v1 are unconfirmed.
 16. **NEW (2026-10-29) — Automation interest:** The user asked about automating production and whether ElevenLabs has an API. Capabilities were researched and a possible workflow explained; no automation implementation or paid API generation has occurred in this workspace.
 17. **NEW (2026-10-29) — Voice mapping supplied:** Narrator `QdMPtN6UaliUKoCqMvVS`, Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. These are user-supplied assignments for the three-voice test, not independently validated API access or approved performances. The labelled script has been converted into request data with these IDs.
+18. **NEW (2026-10-29) — Single handoff document:** Keep only `The_Weirdness_Handoff.md` and update it in place. Use Git history for previous versions instead of numbered files.
 
 ### Strongly developed proposals, not final decisions
 
@@ -93,7 +93,7 @@ Final voice/performance approval; account validation of the three supplied IDs; 
 
 An API key, account-specific API permissions/quotas, automation code, and any API-generated outputs have not been configured or verified in this project.
 
-**Accuracy guardrails:** A complete written pilot and user-reported voice test now exist. Do not repeat v1.3's claim that only an outline/opening exists or that no audio test has happened. Do not claim final casting, multi-voice audio, a finished episode, a completed voice clone, an implemented API pipeline, or a channel launch. No audition audio has been supplied or saved in this workspace, so the assistant has not heard or independently evaluated The Weirdness v1.
+**Accuracy guardrails:** A complete written pilot and user-reported voice test now exist. Do not repeat the obsolete claim that only an outline/opening exists or that no audio test has happened. Do not claim final casting, multi-voice audio, a finished episode, a completed voice clone, an implemented API pipeline, or a channel launch. No audition audio has been supplied or saved in this workspace, so the assistant has not heard or independently evaluated The Weirdness v1.
 
 ---
 
@@ -238,7 +238,7 @@ The v2 script removes redundant dialogue attribution, makes Mara's typed complai
 - The current draft does not explain the sender of the warning text; do not invent an established answer in continuity notes.
 - The suspension/deletion/transfer rules above are draft story rules, not approved shared-universe canon. Review their clarity during listening tests.
 - Earlier outline ideas—premature reflections, pre-pour cooling coffee, gravity failure in 1347, Mara's observations destabilizing the universe, and waiting until the next morning for the ending—are not in the current script. Do not reinsert them automatically.
-- The archival opening and longer five-act development remain in [v1.3](The_Weirdness_Handoff_v1.3.md). Read them only as historical source material; do not treat them as the current draft or current pacing.
+- Earlier opening drafts and the longer five-act development remain in Git history. Read them only as historical source material; do not treat them as the current draft or current pacing.
 
 ---
 
@@ -447,7 +447,7 @@ Scientific motifs discussed as appealing include entropy and the arrow of time, 
 
 ## 12. Instructions for the Next AI Model
 
-Use this v1.4 handoff and the linked episode files to continue **The Weirdness**. Preserve the difference between user choices, assistant proposals, user-reported results, and independently verified artifacts.
+Use this handoff and the linked episode files to continue **The Weirdness**. Update this one document in place; do not create numbered handoff copies. Preserve the difference between user choices, assistant proposals, user-reported results, and independently verified artifacts.
 
 1. Preserve the dark + cosmic + philosophical + absurd vision and enthusiasm for physics-inspired reality breaking. Avoid treating the channel as generic horror.
 2. Maintain the **about-ten-minute maximum**, compelling title, and **first-five-second hook**. No greeting, logo, or music before the story's intrigue.
@@ -478,4 +478,4 @@ Use this v1.4 handoff and the linked episode files to continue **The Weirdness**
 
 ---
 
-*End of handoff — v1.4, updated 2026-10-29. Includes complete pilot files, The Weirdness v1 audition status, all three user-supplied voice IDs, prepared API request bodies, and own-voice audition interest. Generation and assembly remain unimplemented. v1.3 remains an archive.*
+*End of handoff — updated 2026-10-29. Includes complete pilot files, The Weirdness v1 audition status, all three user-supplied voice IDs, prepared API request bodies, and own-voice audition interest. Generation and assembly remain unimplemented. Earlier handoff states are preserved in Git history.*

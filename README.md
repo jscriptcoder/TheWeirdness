@@ -4,7 +4,7 @@ Audio-first stories where ordinary lives collide with impossible realities.
 
 The Weirdness blends cosmic science fiction, dark mystery, philosophy, and absurd humor. Episodes aim for roughly 7–10 minutes, with an immediate hook and a calm, immersive listening experience.
 
-Start with the [project handoff](The_Weirdness_Handoff_v1.4.md) for creative decisions, production status, and next steps. [Version 1.3](The_Weirdness_Handoff_v1.3.md) is an archive.
+Start with the [project handoff](The_Weirdness_Handoff.md) for creative decisions, production status, and next steps. Update that single document in place; Git history preserves earlier versions.
 
 ## Pilot
 
