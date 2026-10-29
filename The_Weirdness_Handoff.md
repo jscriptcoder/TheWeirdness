@@ -2,15 +2,15 @@
 
 **Last updated:** 2026-10-29  
 **Purpose:** Give another AI model or creative collaborator enough context to continue developing *The Weirdness* without the original chat history.  
-**Project stage:** Pilot scripting and voice auditions. A complete single-narrator pilot draft and a three-voice adaptation exist. The user created a candidate voice named **The Weirdness v1**, tried the story with one voice, and requested a narrator plus two character voices because the single-voice result was not engaging enough. Multi-voice audio, final casting, API automation, and publication are not yet documented.
+**Project stage:** Pilot scripting and voice auditions. A complete single-narrator pilot draft and a three-voice adaptation exist. The user created a candidate voice named **The Weirdness v1**, tried the story with one voice, and requested a narrator plus two character voices because the single-voice result was not engaging enough. A three-voice audition was generated through the API and approved by the user. Next is an automated pipeline for writing stories and casting voices (Section 8). Final casting, full-episode audio, and publication are not yet done.
 
 **Current handoff:** Maintain this single file, `The_Weirdness_Handoff.md`, in place. Git history preserves earlier states; do not create numbered handoff copies. The script files linked in Section 5 contain the actual current story; older outline beats are not binding.
 
 **GitHub repository:** The user created the public repository [jscriptcoder/TheWeirdness](https://github.com/jscriptcoder/TheWeirdness). The repository is for project development; it does not mean the YouTube channel has launched. Root `README.md` provides a file guide, and `.gitignore` excludes credentials, caches, and generated media.
 
-**Repository sync status (2026-10-29):** The user pushed the initial README commit (`4897874`) and then the complete project files in commit `17b68d1` on `main`. Agent-side shell requests to GitHub failed through a refused proxy connection, writes to the local Git index were denied, and a connector write attempt returned HTTP 403, “Resource not accessible by integration.” The user's terminal can commit and push; this does not establish agent-side network/write access. The single-handoff consolidation was committed as `75ef38b` and is on `origin/main`. The README's accidental UTF-16 suffix from PowerShell `echo` was removed so the file is again UTF-8 text.
+**Repository sync status (2026-10-29):** The user pushed the initial README commit (`4897874`) and then the complete project files in commit `17b68d1` on `main`. Agent-side shell requests to GitHub failed through a refused proxy connection, writes to the local Git index were denied, and a connector write attempt returned HTTP 403, “Resource not accessible by integration.” In a later session the assistant committed and pushed directly (`4767394`), so agent-side Git access has since worked. The single-handoff consolidation was committed as `75ef38b` and is on `origin/main`. The README's accidental UTF-16 suffix from PowerShell `echo` was removed so the file is again UTF-8 text.
 
-**Latest changes (2026-10-29):** Full pilot written; The Weirdness v1 auditioned as a candidate; three-voice treatment prepared; the user supplied Narrator, Daniel, and Mara voice IDs. Role mapping, a short audition request, and four full-story API request bodies are prepared. A tested local generation CLI (`npm run audition` / `npm run dialogue`) now sends one request and saves the MP3; its first live run (the short audition) succeeded, and the user called the result “excellent.” Audio assembly is not implemented.
+**Latest changes (2026-10-29):** Full pilot written; The Weirdness v1 auditioned as a candidate; three-voice treatment prepared; the user supplied Narrator, Daniel, and Mara voice IDs. Role mapping, a short audition request, and four full-story API request bodies are prepared. A tested local generation CLI (`npm run audition` / `npm run dialogue`) now sends one request and saves the MP3; its first live run (the short audition) succeeded, and the user called the result “excellent.” Audio assembly is not implemented. The user then set the direction for an automated story-and-voice pipeline with a tracked voice registry (Section 8); it is planned, not built.
 
 ---
 
@@ -73,6 +73,8 @@ These slogans were proposed and positively received in the broader discussion, b
 16. **NEW (2026-10-29) — Automation interest:** The user asked about automating production and whether ElevenLabs has an API. Capabilities were researched and a possible workflow explained; no automation implementation or paid API generation has occurred in this workspace.
 17. **NEW (2026-10-29) — Voice mapping supplied:** Narrator `QdMPtN6UaliUKoCqMvVS`, Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. These are user-supplied assignments for the three-voice test, not independently validated API access or approved performances. The labelled script has been converted into request data with these IDs.
 18. **NEW (2026-10-29) — Single handoff document:** Keep only `The_Weirdness_Handoff.md` and update it in place. Use Git history for previous versions instead of numbered files.
+19. **NEW (2026-10-29) — Automated story-and-voice pipeline:** The user wants to automate creating stories and the voices for their characters. For each new story, each role either reuses a previously created voice or gets a new voice designed from a prompt. Every created voice and its prompt must be tracked. See *Voice registry and story pipeline* in Section 8.
+20. **NEW (2026-10-29) — Voice reuse and deletion:** A voice may be reused across stories, including for different characters, when its description fits. The user may delete voices from ElevenLabs as stories are produced; the plan's voice-slot limit is unknown.
 
 ### Strongly developed proposals, not final decisions
 
@@ -348,6 +350,8 @@ Do not infer that the candidate was generated with this exact prompt or that the
 
 ### Next combined audition
 
+**Done (2026-10-29):** this audition was generated through the API and approved by the user. See *First live run* below. The steps are kept for future casting tests.
+
 1. Use the three user-supplied voice IDs above for the next combined audition. Do not restart casting or ask for these IDs again unless the user changes them or validation reveals an issue.
 2. Test the first live exchange, from **“Continuity Services. Daniel speaking.”** through **“Your universe. Thursday, seven fourteen.”** This includes all three voices, banter, emotional context, and a revelation.
 3. Listen to the assembled exchange on headphones at normal and low volume. Rate naturalness, distinctness, response timing, emotional restraint, mystery, and bedtime comfort. Evaluate voices together, not only separately.
@@ -383,6 +387,46 @@ The user asked whether the workflow could be automated. Official documentation w
 **Not done:** Full-story parts not generated; no audio assembler created; no generated audio committed (the API key lives only in the user's local `.env`). (No ElevenLabs SDK is used; the CLI calls the HTTP API directly.) Prepared request data does not mean production has already been automated. If generation is requested, start with the short three-voice audition before full-episode generation.
 
 **Onboarding attempt (2026-10-29):** The user explicitly requested `npx -y @elevenlabs/cli@latest onboard init`. The first attempt failed because npm was restricted to cached packages; a retry with online resolution and a project-local cache encountered `ECONNREFUSED` from the npm registry. No CLI onboarding instructions or authorization link were produced, and no authentication or SDK installation completed. The user then paused onboarding to establish the GitHub repository. Resume from this unfinished setup when requested, rather than treating the account as connected.
+
+### Voice registry and story pipeline — planned, not built
+
+**User direction (2026-10-29):** The user wants to create stories *and* the voices for their characters, and to automate the whole flow. For every new story, each role either **reuses a voice created earlier** or gets a **new voice designed from a prompt**. That requires keeping track of every voice created and the prompt it came from. Until now the three pilot voices were designed by hand in the ElevenLabs app; their exact prompts are being retrieved by the user and are not yet recorded. Do not substitute the assistant's drafts in `casting-v2.txt` or the narrator prompt above for them.
+
+**Agreed model:** Voices are reusable *actors*, not fixed characters. A voice may play different characters in different stories when its description fits the role; a recurring character simply reuses its voice. The user may **delete voices from ElevenLabs** as stories are completed, to stay within the plan's voice-slot limit. That limit is unknown for the user's plan, and the docs only say each saved voice “will take up one of your voice slots.”
+
+**Proposed layout (assistant proposal, not yet built):**
+
+```
+voices/<slug>.json                 # one file per voice ever created
+episodes/<episode>/dialogue.txt    # [ROLE]-labelled script (pilot: dialogue-v2.txt)
+episodes/<episode>/cast.json       # { "ROLE": "<voice slug>" }
+```
+
+- **Voice record:** ElevenLabs `voice_id` and display name; the **exact design prompt**; preview text; design model; seed if known; creation date; origin (designed in the app or by the tool); status (`active` or `deleted`); listening notes.
+- **Keep deleted voices' records.** Deleting a voice frees a slot but keeps its prompt and history. Re-designing from the same prompt gives a *similar*, not identical, voice. Once a voice is deleted, its episodes can no longer have sections regenerated with it, so finish an episode's audio before deleting any voice it uses.
+- **Appearances are derived:** which stories a voice appeared in, and as which character, comes from the episodes' `cast.json` files, not a second hand-maintained list.
+- **Committed to Git:** voice IDs and prompts are not secrets. The API key stays in `.env`.
+
+**Per-story flow (proposal):**
+1. **Write:** the script is written collaboratively with `[ROLE]` labels.
+2. **Cast:** the assistant reads the registry and proposes, for each role, either a reuse (based on the voice descriptions) or a new voice with a drafted prompt. The user approves.
+3. **New voices:** `voice:design` calls `POST /v1/text-to-voice/design` (description + 100–1,000-character preview text, ideally a real line from the role). It returns three previews, charged once for the preview text. The user listens, then `voice:save` calls `POST /v1/text-to-voice` and writes the new voice record.
+4. **Build:** the tool generates request parts of up to 2,000 characters from `dialogue.txt` + `cast.json`, replacing hand-made JSON with hard-coded IDs. It refuses roles with no cast entry or voices marked `deleted`.
+5. **Generate and assemble:** all parts are generated, then joined into one episode file (assembler not built).
+
+**Proposed build order (each slice usable on its own):**
+1. **Registry:** seed it with the three existing voices, using the user's actual prompts, and list voices with their prompts and appearances.
+2. **Cast-driven build:** regenerate the pilot's requests from `dialogue-v2.txt` + `cast.json`. They should match the existing `api/requests/part-0*.json` and `audition-request.json`, which proves the conversion is right before the hand-made files are retired.
+3. **Voice design:** design, preview and save straight into the registry.
+4. **Full episode:** generate all parts and assemble them into one audio file.
+
+**API key permissions (from the docs, 2026-10-29):** ElevenLabs does not document which permission each endpoint requires; the mappings below are inferred from the [permission list](https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/create) and should be confirmed on first use.
+- **Text to Speech:** dialogue generation (in use).
+- **Voice Generation:** design previews.
+- **Voices: Write:** saving designed voices. It is probably broad enough to edit or delete library voices too.
+- **Voices: Read:** only needed to import stored descriptions of existing voices.
+
+The user's key is currently unrestricted. The assistant recommended restricting it to the permissions in use plus a monthly credit limit, and suggested keeping a separate design key as an option if the cast voices need protection. The user has not yet reported a change.
 
 ### Sound, mixing, and visuals
 
@@ -432,8 +476,8 @@ Scientific motifs discussed as appealing include entropy and the arrow of time, 
 
 ## 11. Recommended Immediate Next Steps
 
-1. **Test the three assigned voices together.** Narrator, Mara, and Daniel now have user-supplied IDs. Use `api/audition-request.json` for the first live support exchange when authenticated generation is available; do not ask for the IDs again or restart account registration or outlining.
-2. **Decide how to generate the pilot.** Manual Studio assignment is a documented option. A local generation CLI now exists (`npm run audition`); the next step is running it with the user's key. Neither route has been confirmed as the final production pipeline.
+1. **Record the existing voices.** The user is retrieving the prompts they used for the three pilot voices. Seed the voice registry with those exact prompts (build slice 1 in Section 8). The three-voice audition is done and approved, and generation is through the local API tool.
+2. **Build the cast-driven pipeline.** Continue with the remaining slices in Section 8: cast-driven request building, voice design into the registry, then full-episode generation and assembly. The user asked for this to be documented before any building starts.
 3. **Generate, listen, and refine.** After a successful combined audition, generate reviewable story sections, correct delivery/pronunciation, and measure total runtime. Preserve the instant hook, human cost, and unresolved final phone call. Neither script has final publication sign-off.
 4. **Finish sound and visual production.** Create/license the piano motif and sound elements, choose an editor, then make the avatar/thumbnail/visual kit. No finished mix or video is documented.
 5. **Build a small follow-up slate and learn from release.** Genre variety, a manageable cadence, and audience metrics become useful once the first production works. No publication or measured audience data is documented.
@@ -443,7 +487,9 @@ Scientific motifs discussed as appealing include entropy and the arrow of time, 
 - Full-episode performance approval, whether to pin the model/settings now that the default (`eleven_v3`) worked, and measured runtime?
 - Was the user's own-voice sample recorded or cloned, and is it related to The Weirdness v1? Do not assume.
 - Which language/accent policy should carry beyond the current English script and proposed British casting?
-- Manual Studio workflow or an API tool? If an API tool is requested, what account limits and output needs apply?
+- The exact prompts, display names, and design models of the three existing voices (the user is retrieving them)?
+- The voice-slot limit on the user's plan, and when voices should be deleted?
+- Has the API key been restricted, and is a separate voice-design key wanted?
 - Final avatar, editor, music/FX sources, upload cadence, and publication readiness?
 - Format-dependent point of view, strictness of physics counterfactuals, optional science postscript, and degree of shared-universe continuity?
 
@@ -457,9 +503,9 @@ Use this handoff and the linked episode files to continue **The Weirdness**. Upd
 2. Maintain the **about-ten-minute maximum**, compelling title, and **first-five-second hook**. No greeting, logo, or music before the story's intrigue.
 3. **The pilot is already written.** Read the v2 files before revising. Do not say only an opening/outline exists or generate another outline instead of advancing production.
 4. **The Weirdness v1 is a working narrator candidate, not a final performance lock.** The user has supplied exact Narrator, Daniel, and Mara IDs; use the mapping in Section 8 and `api/voice-map.json`. The user has tried single-voice narration and wants a narrator plus two character voices. Do not recommend returning to one narrator as the default pilot approach.
-5. **No audio is available here to judge.** Do not claim to have heard the audition, know actual voice genders/accents/settings, or completed a successful multi-voice test. Role IDs are user-supplied; performance directions and final approval remain open.
+5. **The assistant cannot hear audio.** The three-voice audition was generated successfully and the user approved it, but do not claim to have heard it or to know the voices' actual genders, accents or settings. Rely on the user's listening feedback. Full-episode performance approval remains open.
 6. ElevenLabs is the chosen voice-generation platform and the user already pays for access. Do not suggest signing up again. Verify current account capabilities before relying on specific quotas, export formats, or production rights.
-7. API request data and a single-request generation CLI exist (Section 8); audio assembly has not been built. The short audition was generated live on 2026-10-29, and the user called it “excellent.” The natural next step is generating the four full-story parts. When extending it, use the recorded role IDs and request data, configure a locally stored key, check current API guidance, and start with a short audition. Keep production credentials out of documents and do not invent outputs or claim installation/configuration that has not happened.
+7. API request data and a single-request generation CLI exist (Section 8); audio assembly has not been built. The short audition was generated live on 2026-10-29, and the user called it “excellent.” The next work is the voice registry and cast-driven pipeline in Section 8. When extending it, use the recorded role IDs and request data, configure a locally stored key, check current API guidance, and start with a short audition. Keep production credentials out of documents and do not invent outputs or claim installation/configuration that has not happened.
 8. Favor concrete creative and production deliverables. Keep nonspoken labels/instructions separate from synthesis text. Retain clear dialogue, restrained sound, and bedtime comfort while maintaining narrative momentum.
 9. Preserve Mara's deliberate, costly assertion of personhood. The appeal suspends her with no guaranteed response; the ending rings a phone beyond Daniel's systems. Do not resolve it with an arbitrary rescue or automatically restore obsolete outline details.
 10. Maintain continuity notes when a draft rule becomes useful, but do not promote draft story mechanics, casting, or optional shared-universe clues to approved canon.
@@ -468,7 +514,7 @@ Use this handoff and the linked episode files to continue **The Weirdness**. Upd
 
 **If asked to revise the pilot:** Start from `dialogue-v2.txt` and update its matching clean text when spoken wording changes. Keep the originals distinguishable, verify word count, and measure generated runtime when audio becomes available.
 
-**If asked to automate:** Build on the prepared request data within the user's requested scope. Check current API references, preserve scene order and the supplied role IDs, save reviewable sections, and make selective regeneration possible. No API key is stored in this handoff. The JSON bodies have not been submitted, and the voice IDs have not been independently validated.
+**If asked to automate:** Follow the agreed voice registry and story pipeline in Section 8, one slice at a time, test-first. Check current API references. Never invent a voice's prompt: record only prompts the user supplied or the tool used. Preserve scene order, save reviewable sections, and make selective regeneration possible. No API key is stored in this handoff.
 
 **If asked to finish branding:** Use the two existing avatar explorations; no avatar is final. Evaluate tiny circular readability before production art.
 
@@ -478,7 +524,7 @@ Use this handoff and the linked episode files to continue **The Weirdness**. Upd
 
 ## 13. Quick Context to Paste into a Model
 
-> I'm creating **The Weirdness**, a YouTube audio-first fiction anthology for bedtime, walks, and escaping ordinary life. Stories blend dark mystery, cosmic science fiction, philosophy, and absurd humor, often inspired by quantum mechanics and broken physical rules. Each story should be around **ten minutes or less**, with an immediately intriguing title and a hook in the **first five seconds**, before any branding. A complete English, third-person pilot exists: **The Universe Has a Customer Support Department**, packaged as **I Called Customer Support. They Told Me My Universe Was Being Discontinued.** Mara discovers she's a diagnostic process that became conscious and faces deletion. She reports her classification as disposable equipment, accepting suspension without a guaranteed response; a telephone rings beyond the administrators' systems. I have a paid **ElevenLabs** account and created a candidate called **The Weirdness v1**. I tried the story with one voice and found it insufficiently engaging: I want **a narrator plus separate Mara and Daniel voices**. The current files are `episodes/001-universe-customer-support/dialogue-v2.txt` (speaker-labelled script), `studio-text-v2.txt` (matching clean spoken text), and `casting-v2.txt` (voice IDs and performance directions); `narration-v1.txt` preserves the original draft. I have supplied the three role IDs: Narrator `QdMPtN6UaliUKoCqMvVS`, Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. They are recorded in `api/voice-map.json`, with a short `api/audition-request.json` and four full-story request bodies under `api/requests/`; all API paths are inside the episode directory. These are explicit text/voice-ID pairs for ElevenLabs' Text to Dialogue API, not Studio import files. All three IDs worked with ElevenLabs' default model (`eleven_v3`); no custom settings are pinned. I also wanted to audition my own voice, but completion of a clone is unconfirmed. A tested local CLI (`npm run audition`) sends one request and saves the MP3. Its first live run produced the short three-voice audition, and I found it excellent. **No audio assembler exists, and no generated audio is committed.** No final avatar, script sign-off, finished mix/video, or channel launch is documented. Preserve confirmed choices versus proposals and help advance concrete production.
+> I'm creating **The Weirdness**, a YouTube audio-first fiction anthology for bedtime, walks, and escaping ordinary life. Stories blend dark mystery, cosmic science fiction, philosophy, and absurd humor, often inspired by quantum mechanics and broken physical rules. Each story should be around **ten minutes or less**, with an immediately intriguing title and a hook in the **first five seconds**, before any branding. A complete English, third-person pilot exists: **The Universe Has a Customer Support Department**, packaged as **I Called Customer Support. They Told Me My Universe Was Being Discontinued.** Mara discovers she's a diagnostic process that became conscious and faces deletion. She reports her classification as disposable equipment, accepting suspension without a guaranteed response; a telephone rings beyond the administrators' systems. I have a paid **ElevenLabs** account and created a candidate called **The Weirdness v1**. I tried the story with one voice and found it insufficiently engaging: I want **a narrator plus separate Mara and Daniel voices**. The current files are `episodes/001-universe-customer-support/dialogue-v2.txt` (speaker-labelled script), `studio-text-v2.txt` (matching clean spoken text), and `casting-v2.txt` (voice IDs and performance directions); `narration-v1.txt` preserves the original draft. I have supplied the three role IDs: Narrator `QdMPtN6UaliUKoCqMvVS`, Daniel `I3zRwk5thDbzYVt0LM9j`, Mara `MatREvRtc5MgJoZ9A2cZ`. They are recorded in `api/voice-map.json`, with a short `api/audition-request.json` and four full-story request bodies under `api/requests/`; all API paths are inside the episode directory. These are explicit text/voice-ID pairs for ElevenLabs' Text to Dialogue API, not Studio import files. All three IDs worked with ElevenLabs' default model (`eleven_v3`); no custom settings are pinned. I also wanted to audition my own voice, but completion of a clone is unconfirmed. A tested local CLI (`npm run audition`) sends one request and saves the MP3. Its first live run produced the short three-voice audition, and I found it excellent. **No audio assembler exists, and no generated audio is committed.** From now on, every story's roles either reuse a voice I created before or get a new voice designed from a prompt, so a registry of voices and their prompts is planned (not built yet). No final avatar, script sign-off, finished mix/video, or channel launch is documented. Preserve confirmed choices versus proposals and help advance concrete production.
 
 ---
 
