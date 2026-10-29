@@ -55,6 +55,27 @@ Every voice created for the channel has a record in [`voices/`](voices): its Ele
 npm run voices   # list every voice, its prompt, and where it appears
 ```
 
+To design a new voice, write a draft in `voices/designs/<voice-name>.json`:
+
+```json
+{
+  "name": "The Archivist",
+  "prompt": "Elderly man, 70s, dry and precise. ...",
+  "preview_text": "A real line from the character's script, 100 to 1,000 characters long. ...",
+  "model_id": "eleven_ttv_v3",
+  "seed": 42
+}
+```
+
+`model_id` (default `eleven_ttv_v3`) and `seed` are optional. The prompt must be 20–1,000 characters. Then:
+
+```sh
+npm run voice:design -- archivist   # saves three previews in generated/voices/archivist/<timestamp>/
+npm run voice:save -- archivist 2   # saves preview 2 as a voice and writes voices/archivist.json
+```
+
+Designing costs credits for the preview text; saving takes one of the plan's voice slots. Both refuse a name that already exists in `voices/`, and invalid drafts are refused before anything is sent. Your API key needs the Voice Generation and Voices: Write permissions.
+
 ## Visual references
 
 [Avatar concept](assets/avatar-concept-01.png) and [alternative directions](assets/avatar-alternatives-sheet.png) are explorations. No final avatar is selected.

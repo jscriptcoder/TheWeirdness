@@ -1,6 +1,7 @@
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, join } from 'node:path';
 import { MAX_CHARACTERS, countCharacters, type DialogueRequest } from './dialogue.ts';
+import type { Result } from './json-file.ts';
 import { loadRegistry, type Voice } from './voices.ts';
 
 // Passage numbers count from 1 and include both ends.
@@ -17,8 +18,6 @@ export type BuildRequestsOptions = {
 export type BuildRequestsResult = { ok: true; requests: DialogueRequest[] } | { ok: false; error: string };
 
 type Passage = { number: number; role: string; text: string };
-
-type Result<T> = { ok: true; value: T } | { ok: false; error: string };
 
 const LABEL = /^\[([A-Z0-9_ -]+)\]$/gm;
 

@@ -10,7 +10,7 @@
 
 **Repository sync status (2026-10-29):** The user pushed the initial README commit (`4897874`) and then the complete project files in commit `17b68d1` on `main`. Agent-side shell requests to GitHub failed through a refused proxy connection, writes to the local Git index were denied, and a connector write attempt returned HTTP 403, “Resource not accessible by integration.” In a later session the assistant committed and pushed directly (`4767394`), so agent-side Git access has since worked. The single-handoff consolidation was committed as `75ef38b` and is on `origin/main`. The README's accidental UTF-16 suffix from PowerShell `echo` was removed so the file is again UTF-8 text.
 
-**Latest changes (2026-10-29):** Full pilot written; The Weirdness v1 auditioned as a candidate; three-voice treatment prepared; the user supplied Narrator, Daniel, and Mara voice IDs. Role mapping, a short audition request, and four full-story API request bodies are prepared. A tested local generation CLI (`npm run audition` / `npm run dialogue`) now sends one request and saves the MP3; its first live run (the short audition) succeeded, and the user called the result “excellent.” Audio assembly is not implemented. The user then set the direction for an automated story-and-voice pipeline with a tracked voice registry (Section 8). Slices 1 and 2 are built: `voices/` holds the three pilot voices with their confirmed full prompts (`npm run voices` lists them), the pilot is cast in `cast.json`, and `npm run requests` generates the API request files from the script and cast. Voice design and full-episode assembly are planned.
+**Latest changes (2026-10-29):** Full pilot written; The Weirdness v1 auditioned as a candidate; three-voice treatment prepared; the user supplied Narrator, Daniel, and Mara voice IDs. Role mapping, a short audition request, and four full-story API request bodies are prepared. A tested local generation CLI (`npm run audition` / `npm run dialogue`) now sends one request and saves the MP3; its first live run (the short audition) succeeded, and the user called the result “excellent.” Audio assembly is not implemented. The user then set the direction for an automated story-and-voice pipeline with a tracked voice registry (Section 8). Slices 1–3 are built: `voices/` holds the three pilot voices with their confirmed full prompts (`npm run voices` lists them), the pilot is cast in `cast.json`, `npm run requests` generates the API request files from the script and cast, and `npm run voice:design` / `voice:save` design new voices into the registry (not yet run against the live API). Full-episode assembly is planned.
 
 ---
 
@@ -388,7 +388,7 @@ The user asked whether the workflow could be automated. Official documentation w
 
 **Onboarding attempt (2026-10-29):** The user explicitly requested `npx -y @elevenlabs/cli@latest onboard init`. The first attempt failed because npm was restricted to cached packages; a retry with online resolution and a project-local cache encountered `ECONNREFUSED` from the npm registry. No CLI onboarding instructions or authorization link were produced, and no authentication or SDK installation completed. The user then paused onboarding to establish the GitHub repository. Resume from this unfinished setup when requested, rather than treating the account as connected.
 
-### Voice registry and story pipeline — slices 1–2 built, the rest planned
+### Voice registry and story pipeline — slices 1–3 built, slice 4 planned
 
 **User direction (2026-10-29):** The user wants to create stories *and* the voices for their characters, and to automate the whole flow. For every new story, each role either **reuses a voice created earlier** or gets a **new voice designed from a prompt**. That requires keeping track of every voice created and the prompt it came from. The three pilot voices were designed by hand in the ElevenLabs app. The user confirmed their prompts: Mara's and Daniel's are the design prompts in `casting-v2.txt`, and the narrator's is the prompt above.
 
@@ -399,6 +399,10 @@ The user asked whether the workflow could be automated. Official documentation w
 **Proof:** rebuilding the pilot from `dialogue-v2.txt` + `cast.json` reproduces the four hand-made parts and the audition (passages 6–15) byte for byte, as stored in Git. A test keeps checking this. The hand-made `api/voice-map.json` is retired; `cast.json` and `voices/` replace it. The request files stay committed so they can be reviewed, but are now generated: edit the script or cast and re-run `npm run requests`, never the JSON.
 
 **Verified against ElevenLabs (read-only `GET /v1/voices/{id}`, 2026-10-29):** all three IDs exist, are `generated` voices, and their display names match the registry. **ElevenLabs keeps only about 500 characters of a voice's description:** 479, 471 and 500 characters for the narrator, Daniel and Mara, each the exact opening of the full prompt (Daniel loses his last two sentences, Mara her last). The registry is therefore the only complete record of each prompt. Expect the same cut-off when slice 3 saves designed voices.
+
+**Slice 3 — built (2026-10-29), not yet run live:** a new voice starts as a draft, `voices/designs/<voice-name>.json`, with `name` (the ElevenLabs display name), `prompt`, `preview_text`, optional `model_id` (default `eleven_ttv_v3`) and optional `seed`. Unknown fields are refused, so a typo is caught rather than silently ignored. `npm run voice:design -- <voice-name>` sends the prompt and preview text to `POST /v1/text-to-voice/design` and saves the previews as `generated/voices/<voice-name>/<UTC timestamp>/preview-1.mp3`, `-2`, `-3`, plus `design.json`, which records exactly what was sent and the preview IDs. Every run gets its own folder. After listening, `npm run voice:save -- <voice-name> <n>` saves preview *n* of the **latest** run with `POST /v1/text-to-voice` and writes `voices/<voice-name>.json` (origin `voice-design-api`, status `active`, today's date). That record holds the full prompt that produced the previews, even if the draft was edited afterwards, and a `design` block with the model, preview text and seed. Both commands refuse, before spending credits: a missing key; a voice name that isn't lowercase words joined by hyphens; a name already in `voices/` (so a voice is never overwritten); and a draft outside ElevenLabs' own limits (from its OpenAPI spec: prompt 20–1,000 characters, preview text 100–1,000, seed 0–2,147,483,647, model `eleven_multilingual_ttv_v2` or `eleven_ttv_v3`). `voice:save` also refuses a preview number that the latest run doesn't have. API errors are reported with their status and body, and nothing is saved. Code: `src/voice-design.ts`, `src/voice-cli.ts`; tests: `src/voice-design.test.ts` (fake API). Shared helpers: `src/elevenlabs.ts` (key check and requests) and `src/json-file.ts`.
+
+**Not yet confirmed live:** how long a preview ID stays usable (the docs don't say, so save soon after designing), whether ElevenLabs also cuts saved descriptions to about 500 characters, and which key permission each call needs.
 
 **Agreed model:** Voices are reusable *actors*, not fixed characters. A voice may play different characters in different stories when its description fits the role; a recurring character simply reuses its voice. The user may **delete voices from ElevenLabs** as stories are completed, to stay within the plan's voice-slot limit. That limit is unknown for the user's plan, and the docs only say each saved voice “will take up one of your voice slots.”
 
@@ -425,7 +429,7 @@ episodes/<episode>/cast.json       # { "ROLE": "<voice slug>" }
 **Proposed build order (each slice usable on its own):**
 1. **Registry — done.** Seeded with the three existing voices and their confirmed prompts; `npm run voices` lists voices with their prompts and appearances.
 2. **Cast-driven build — done.** `npm run requests` regenerates the pilot's requests from `dialogue-v2.txt` + `cast.json`, identical to the hand-made files.
-3. **Voice design:** design, preview and save straight into the registry.
+3. **Voice design — done (not yet run live).** `npm run voice:design` and `voice:save` design, preview and save voices straight into the registry.
 4. **Full episode:** generate all parts and assemble them into one audio file.
 
 **API key permissions (from the docs, 2026-10-29):** ElevenLabs does not document which permission each endpoint requires; the mappings below are inferred from the [permission list](https://elevenlabs.io/docs/api-reference/service-accounts/api-keys/create) and should be confirmed on first use.
@@ -434,7 +438,7 @@ episodes/<episode>/cast.json       # { "ROLE": "<voice slug>" }
 - **Voices: Write:** saving designed voices. It is probably broad enough to edit or delete library voices too.
 - **Voices: Read:** only needed to import stored descriptions of existing voices.
 
-The user's key is currently unrestricted. The assistant recommended restricting it to the permissions in use plus a monthly credit limit, and suggested keeping a separate design key as an option if the cast voices need protection. The user has not yet reported a change.
+The assistant recommended restricting the key to the permissions in use plus a monthly credit limit, and suggested keeping a separate design key as an option if the cast voices need protection. On 2026-10-29 the user reported adding the Voice Generation and Voices: Write permissions to their key; whether other permissions or a credit limit were also set is not recorded.
 
 ### Sound, mixing, and visuals
 
@@ -484,7 +488,7 @@ Scientific motifs discussed as appealing include entropy and the arrow of time, 
 
 ## 11. Recommended Immediate Next Steps
 
-1. **Voice design (slice 3).** The voice registry (slice 1) and cast-driven request building (slice 2) are done. Next, design, preview and save new voices straight into the registry. This needs the key's Voice Generation and Voices: Write permissions.
+1. **First live voice design.** Slices 1–3 are built. Design the first real voice for the next story's cast, listen to the previews, and save one. This confirms the key's new permissions and the live response.
 2. **Full episode (slice 4).** Generate all parts and assemble them into one audio file; measure the runtime.
 3. **Generate, listen, and refine.** After a successful combined audition, generate reviewable story sections, correct delivery/pronunciation, and measure total runtime. Preserve the instant hook, human cost, and unresolved final phone call. Neither script has final publication sign-off.
 4. **Finish sound and visual production.** Create/license the piano motif and sound elements, choose an editor, then make the avatar/thumbnail/visual kit. No finished mix or video is documented.

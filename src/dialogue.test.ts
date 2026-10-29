@@ -7,8 +7,8 @@ import {
   DialogueRequestSchema,
   generateDialogue,
   type DialogueRequest,
-  type Fetch,
 } from './dialogue.ts';
+import type { Fetch } from './elevenlabs.ts';
 import { makeWorkspace } from './test-support.ts';
 
 const NARRATOR = 'QdMPtN6UaliUKoCqMvVS';
