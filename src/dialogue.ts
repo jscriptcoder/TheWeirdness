@@ -6,7 +6,7 @@ const ENDPOINT = 'https://api.elevenlabs.io/v1/text-to-dialogue?output_format=mp
 
 // ElevenLabs recommends at most 2,000 characters across all passages per request;
 // longer requests may stop early or be rejected after spending credits.
-const MAX_CHARACTERS = 2000;
+export const MAX_CHARACTERS = 2000;
 
 const nonBlank = z.string().refine((value) => value.trim() !== '', 'must not be blank');
 
@@ -16,6 +16,10 @@ export const DialogueRequestSchema = z.looseObject({
 });
 
 export type DialogueRequest = z.infer<typeof DialogueRequestSchema>;
+
+// The limit counts the text of every passage; voice IDs and settings are free.
+export const countCharacters = (inputs: DialogueRequest['inputs']) =>
+  inputs.reduce((total, input) => total + input.text.length, 0);
 
 export type Fetch = (url: string, init: RequestInit) => Promise<Response>;
 
@@ -84,7 +88,7 @@ export const generateDialogue = async (
   }
 
   const request = parsed.data;
-  const characters = request.inputs.reduce((total, input) => total + input.text.length, 0);
+  const characters = countCharacters(request.inputs);
   if (characters > MAX_CHARACTERS) {
     return failure(
       `Request has ${characters} characters; split it to ${MAX_CHARACTERS} or fewer per request.`,

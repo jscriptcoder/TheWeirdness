@@ -1,14 +1,15 @@
 import { existsSync } from 'node:fs';
-import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import {
   DialogueRequestSchema,
   generateDialogue,
   type DialogueRequest,
   type Fetch,
 } from './dialogue.ts';
+import { makeWorkspace } from './test-support.ts';
 
 const NARRATOR = 'QdMPtN6UaliUKoCqMvVS';
 const MARA = 'MatREvRtc5MgJoZ9A2cZ';
@@ -33,18 +34,6 @@ const fakeElevenLabs = (response: () => Response = () => new Response(AUDIO)) =>
   };
   return { fetch, sent };
 };
-
-const workspaces: string[] = [];
-
-const makeWorkspace = async () => {
-  const dir = await mkdtemp(join(tmpdir(), 'weirdness-'));
-  workspaces.push(dir);
-  return dir;
-};
-
-afterEach(async () => {
-  await Promise.all(workspaces.splice(0).map((dir) => rm(dir, { recursive: true, force: true })));
-});
 
 const writeRequestFile = async (dir: string, body: unknown, name = 'audition-request.json') => {
   const path = join(dir, name);

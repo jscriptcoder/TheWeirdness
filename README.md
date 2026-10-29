@@ -21,9 +21,16 @@ An accountant calls about a broken clock and learns her universe is being discon
 
 ## ElevenLabs preparation
 
-[Voice assignments](episodes/001-universe-customer-support/api/voice-map.json) map the three roles to user-supplied voice IDs. A [short audition request](episodes/001-universe-customer-support/api/audition-request.json) and four ordered [full-story requests](episodes/001-universe-customer-support/api/requests) are prepared for the [Text to Dialogue API](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert).
+The [cast](episodes/001-universe-customer-support/cast.json) assigns a voice from [`voices/`](voices) to each role. A [short audition request](episodes/001-universe-customer-support/api/audition-request.json) and four ordered [full-story requests](episodes/001-universe-customer-support/api/requests) are prepared for the [Text to Dialogue API](https://elevenlabs.io/docs/api-reference/text-to-dialogue/convert).
 
-The JSON files are API request bodies, not Studio imports. Each contains spoken text paired with its voice ID.
+The JSON files are API request bodies, not Studio imports. Each contains spoken text paired with its voice ID. They are generated from the script and cast, so edit those and rebuild rather than editing the JSON:
+
+```sh
+npm run requests -- episodes/001-universe-customer-support/dialogue-v2.txt                    # api/requests/part-NN.json
+npm run requests -- episodes/001-universe-customer-support/dialogue-v2.txt --audition 6-15    # api/audition-request.json
+```
+
+Each part holds whole passages up to 2,000 characters. The build refuses roles missing from `cast.json`, voices marked `deleted`, and passages that are empty or too long, and writes nothing when it refuses.
 
 ### Generating audio
 

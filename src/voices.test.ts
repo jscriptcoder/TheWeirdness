@@ -1,45 +1,8 @@
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
-import { afterEach, describe, expect, it } from 'vitest';
-import { VoiceRecordSchema, formatRegistry, loadRegistry, type VoiceRecord } from './voices.ts';
-
-const getVoiceRecord = (overrides?: Partial<VoiceRecord>): VoiceRecord =>
-  VoiceRecordSchema.parse({
-    voice_id: 'MatREvRtc5MgJoZ9A2cZ',
-    name: 'Mara',
-    prompt: 'Native English, subtle southern British English accent. Female, 35-45.',
-    created: '2026-10-29',
-    origin: 'elevenlabs-app',
-    status: 'active',
-    ...overrides,
-  });
-
-const workspaces: string[] = [];
-
-afterEach(async () => {
-  await Promise.all(workspaces.splice(0).map((dir) => rm(dir, { recursive: true, force: true })));
-});
-
-type Project = {
-  voices?: Record<string, unknown>;
-  casts?: Record<string, unknown>;
-};
-
-const makeProject = async ({ voices = {}, casts = {} }: Project) => {
-  const root = await mkdtemp(join(tmpdir(), 'weirdness-'));
-  workspaces.push(root);
-  await mkdir(join(root, 'voices'));
-  await mkdir(join(root, 'episodes'));
-  for (const [slug, record] of Object.entries(voices)) {
-    await writeFile(join(root, 'voices', `${slug}.json`), JSON.stringify(record));
-  }
-  for (const [episode, cast] of Object.entries(casts)) {
-    await mkdir(join(root, 'episodes', episode));
-    await writeFile(join(root, 'episodes', episode, 'cast.json'), JSON.stringify(cast));
-  }
-  return root;
-};
+import { describe, expect, it } from 'vitest';
+import { getVoiceRecord, makeProject } from './test-support.ts';
+import { formatRegistry, loadRegistry } from './voices.ts';
 
 describe('loadRegistry', () => {
   it('lists every voice by slug with the roles it played, derived from episode casts', async () => {
@@ -114,25 +77,6 @@ describe('loadRegistry', () => {
       ok: false,
       error: expect.stringMatching(/001-universe-customer-support.*DANIEL.*"danial"/),
     });
-  });
-
-  it('casts the pilot with the same voice IDs the prepared requests use', async () => {
-    const result = await loadRegistry('.');
-    const voiceMap: unknown = JSON.parse(
-      await readFile('episodes/001-universe-customer-support/api/voice-map.json', 'utf8'),
-    );
-
-    expect(result.ok).toBe(true);
-    const pilotCast = result.ok
-      ? Object.fromEntries(
-          result.voices.flatMap((voice) =>
-            voice.appearances
-              .filter((appearance) => appearance.episode === '001-universe-customer-support')
-              .map((appearance) => [appearance.role, voice.record.voice_id]),
-          ),
-        )
-      : {};
-    expect(pilotCast).toEqual(voiceMap);
   });
 });
 
